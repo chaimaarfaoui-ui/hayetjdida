@@ -1,0 +1,2851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Hayet — Restore. Rebuild. Renew.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Jost:wght@200;300;400;500&family=Playfair+Display:ital,wght@0,400;1,300;1,400&display=swap" rel="stylesheet"/>
+<style>
+/* ═══════════════════════════════════════════════
+   BASE
+═══════════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  /* Candlelight amber palette — from the vibe photo */
+  --sage:#C07A2F;--sage-l:#D4943A;--sage-pale:#FDF0DC;
+  --ink:#1A1208;--ink2:#2E2010;
+  --cream:#FDF5E4;--sand:#F0DEBA;--sand-d:#C8A46A;
+  --terra:#8B3A1A;--terra-l:#A84D28;
+  --blush:#D4836A;--blush-pale:#FBE8E0;
+  --gold:#C9922A;
+  --white:#FFFBF0;
+  --amber:#E8A030;--ember:#6B2A0E;--smoke:#1C1408;
+  --nav-h:70px;
+  --F:'Cormorant Garamond',Georgia,serif;
+  --B:'Jost',sans-serif;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--B);background:var(--cream);color:var(--ink);overflow-x:hidden}
+
+/* ═══════════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  height:var(--nav-h);
+  background:rgba(253,245,228,0.96);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(200,164,106,0.35);
+  display:flex;align-items:center;
+}
+.nav-wrap{
+  width:100%;max-width:1480px;margin:0 auto;
+  padding:0 52px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.logo{
+  font-family:var(--F);font-size:1.7rem;font-weight:300;
+  color:var(--ink);text-decoration:none;letter-spacing:.04em;
+  cursor:pointer;
+}
+.logo em{color:var(--sage);font-style:italic}
+.logo sup{font-size:.45em;color:var(--sand-d);vertical-align:super;letter-spacing:.08em;font-family:var(--B);font-weight:300}
+.nav-center{display:flex;align-items:center;gap:0}
+.nav-btn{
+  background:none;border:none;cursor:pointer;
+  font-family:var(--B);font-size:.72rem;font-weight:400;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink2);padding:0 22px;height:var(--nav-h);
+  display:flex;align-items:center;
+  transition:color .2s;position:relative;
+}
+.nav-btn::after{
+  content:'';position:absolute;bottom:0;left:22px;right:22px;
+  height:2px;background:var(--sage);
+  transform:scaleX(0);transition:transform .25s;
+}
+.nav-btn:hover,.nav-btn.active{color:var(--sage)}
+.nav-btn:hover::after,.nav-btn.active::after{transform:scaleX(1)}
+.nav-right{display:flex;align-items:center;gap:16px}
+.nav-cta{
+  background:var(--sage);color:#fff;
+  font-family:var(--B);font-size:.7rem;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;
+  padding:11px 28px;border:none;cursor:pointer;
+  transition:background .2s;
+}
+.nav-cta:hover{background:var(--sage-l)}
+.burger{display:none;background:none;border:none;cursor:pointer;padding:8px;flex-direction:column;gap:5px}
+.burger span{width:22px;height:1.5px;background:var(--ink);display:block;transition:all .3s}
+
+/* ═══════════════════════════════════════════════
+   VIEWS — each "page" is a view
+═══════════════════════════════════════════════ */
+.view{display:none;padding-top:var(--nav-h)}
+.view.active{display:block}
+
+/* ═══════════════════════════════════════════════
+   SECTION REUSABLES
+═══════════════════════════════════════════════ */
+.container{max-width:1200px;margin:0 auto;padding:0 52px}
+.sec{padding:88px 0}
+.lbl{
+  font-size:.62rem;font-weight:400;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--sage);margin-bottom:18px;
+  display:flex;align-items:center;gap:14px;
+}
+.lbl::before{content:'';width:28px;height:1px;background:var(--sage)}
+.h1{font-family:var(--F);font-size:clamp(3rem,5.5vw,5.2rem);font-weight:300;line-height:1.04;color:var(--ink)}
+.h2{font-family:var(--F);font-size:clamp(2rem,3.5vw,3.2rem);font-weight:300;line-height:1.1;color:var(--ink)}
+.h3{font-family:var(--F);font-size:clamp(1.5rem,2.5vw,2rem);font-weight:300;line-height:1.2;color:var(--ink)}
+em{font-style:italic;color:var(--terra)}
+.body-text{font-size:.95rem;font-weight:300;line-height:1.9;color:var(--ink2)}
+.btn{
+  display:inline-block;
+  font-family:var(--B);font-size:.7rem;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;
+  padding:15px 40px;border:none;cursor:pointer;
+  transition:all .25s;text-decoration:none;
+}
+.btn-sage{background:var(--sage);color:#fff}
+.btn-sage:hover{background:var(--sage-l)}
+.btn-terra{background:var(--terra);color:#fff}
+.btn-terra:hover{background:var(--terra-l)}
+.btn-outline{background:transparent;color:var(--ink);border:1px solid var(--sand-d)}
+.btn-outline:hover{border-color:var(--sage);color:var(--sage)}
+.btn-white{background:#fff;color:var(--terra)}
+.btn-white:hover{background:var(--cream)}
+
+/* ═══════════════════════════════════════════════
+   ① HOME VIEW
+═══════════════════════════════════════════════ */
+
+/* ═══════════════════════════════════════════════
+   HERO SLIDESHOW
+═══════════════════════════════════════════════ */
+.hero-slides{
+  position:relative;
+  height:calc(100vh - var(--nav-h));
+  min-height:600px;
+  overflow:hidden;
+  background:var(--ink);
+}
+.hslide{
+  position:absolute;inset:0;
+  display:flex;align-items:center;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 1.1s cubic-bezier(.4,0,.2,1);
+  z-index:1;
+}
+.hslide.active{
+  opacity:1;
+  pointer-events:all;
+  z-index:2;
+}
+.hslide-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;          /* or try: 75% auto  /  50% auto */
+  background-position: center top; /* shows face/top of portrait image */
+  background-repeat: no-repeat;
+  transform: none;                 /* remove any scale if present */
+}
+.hslide.active .hslide-bg{
+  transform:scale(1);
+}
+.hslide-overlay{
+  position:absolute;inset:0;z-index:1;
+  background:linear-gradient(
+    105deg,
+    rgba(26,18,8,.88) 0%,
+    rgba(26,18,8,.62) 45%,
+    rgba(26,18,8,.25) 75%,
+    rgba(26,18,8,.10) 100%
+  );
+}
+.hslide-content{
+  position:relative;z-index:3;
+  padding:0 72px;
+  max-width:720px;
+  transform:translateY(22px);
+  opacity:0;
+  transition:opacity .8s .35s ease, transform .8s .35s ease;
+}
+.hslide.active .hslide-content{
+  opacity:1;
+  transform:translateY(0);
+}
+.hslide-kicker{
+  font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;
+  color:rgba(200,160,90,.8);margin-bottom:28px;
+  display:flex;align-items:center;gap:14px;font-weight:400;font-family:var(--B);
+}
+.hslide-kicker::before{
+  content:'';flex-shrink:0;width:32px;height:1px;background:rgba(200,160,90,.5);
+}
+.hslide-title{
+  font-family:var(--F);
+  font-size:clamp(3rem,6vw,5.6rem);
+  font-weight:300;line-height:1.02;
+  color:#fff;
+  margin-bottom:26px;
+}
+.hslide-title em{
+  display:block;font-style:italic;color:var(--amber);
+  text-shadow:0 0 60px rgba(232,160,48,.3);
+}
+.hslide-body{
+  font-size:.97rem;font-weight:300;line-height:1.9;
+  color:rgba(255,255,255,.55);
+  max-width:500px;margin-bottom:44px;
+}
+.hslide-actions{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.hslide-ghost{
+  display:inline-block;
+  font-family:var(--B);font-size:.7rem;font-weight:400;
+  letter-spacing:.14em;text-transform:uppercase;
+  padding:15px 36px;
+  background:transparent;
+  color:rgba(255,255,255,.7);
+  border:1px solid rgba(255,255,255,.22);
+  cursor:pointer;
+  transition:all .25s;
+  font-size:.7rem;
+}
+.hslide-ghost:hover{
+  border-color:rgba(255,255,255,.6);
+  color:#fff;
+  background:rgba(255,255,255,.06);
+}
+
+/* Controls */
+.hslide-controls{
+  position:absolute;bottom:52px;left:72px;z-index:10;
+  display:flex;align-items:center;gap:20px;
+}
+.hslide-arrow{
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.14);
+  color:rgba(255,255,255,.6);
+  width:40px;height:40px;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:1rem;
+  transition:all .22s;
+  font-family:var(--B);
+}
+.hslide-arrow:hover{
+  background:rgba(255,255,255,.15);
+  color:#fff;
+  border-color:rgba(255,255,255,.3);
+}
+.hslide-dots{display:flex;align-items:center;gap:8px}
+.sdot{
+  width:5px;height:5px;border-radius:50%;
+  background:rgba(255,255,255,.3);
+  border:none;cursor:pointer;padding:0;
+  transition:all .3s;
+}
+.sdot.active{
+  background:var(--amber);
+  width:22px;border-radius:3px;
+}
+.sdot:hover:not(.active){background:rgba(255,255,255,.6)}
+
+/* Progress bar */
+.hslide-progress{
+  position:absolute;bottom:0;left:0;right:0;z-index:10;
+  height:2px;background:rgba(255,255,255,.08);
+}
+.hslide-bar{
+  height:100%;
+  background:linear-gradient(90deg, var(--amber), var(--sage-l));
+  width:0%;
+  transition:width linear;
+}
+
+/* Counter */
+.hslide-counter{
+  position:absolute;bottom:52px;right:52px;z-index:10;
+  font-family:var(--F);font-size:.85rem;font-weight:300;
+  color:rgba(255,255,255,.25);letter-spacing:.06em;font-style:italic;
+}
+#slideNum{color:rgba(255,255,255,.6)}
+
+/* Scroll hint */
+.hslide-scroll-hint{
+  position:absolute;bottom:55px;left:50%;transform:translateX(-50%);z-index:10;
+  font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(255,255,255,.2);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+}
+.hslide-scroll-hint::after{
+  content:'';width:1px;height:32px;
+  background:linear-gradient(to bottom, rgba(255,255,255,.25), transparent);
+  animation:scroll-hint-drop 1.8s ease-in-out infinite;
+}
+@keyframes scroll-hint-drop{
+  0%,100%{opacity:.4;transform:translateY(0)}
+  50%{opacity:1;transform:translateY(6px)}
+}
+
+/* Slide strip – thin thumbnail strip on right */
+.hslide-strip{
+  position:absolute;right:0;top:0;bottom:0;z-index:5;
+  width:6px;
+  display:flex;flex-direction:column;
+}
+.hslide-strip-seg{
+  flex:1;
+  background:rgba(255,255,255,.05);
+  border-bottom:1px solid rgba(255,255,255,.04);
+  transition:background .4s;
+}
+.hslide-strip-seg.active{background:rgba(232,160,48,.45)}
+
+/* Mobile */
+@media(max-width:900px){
+  .hslide-content{padding:0 28px;max-width:100%}
+  .hslide-controls{left:28px;bottom:44px}
+  .hslide-counter{right:28px;bottom:44px}
+  .hslide-title{font-size:clamp(2.4rem,7vw,4rem)}
+}
+@media(max-width:600px){
+  .hslide-content{padding:0 20px}
+  .hslide-controls{left:20px}
+  .hslide-counter{display:none}
+  .hslide-ghost{display:none}
+}
+
+/* PHILOSOPHY BAR */
+.philosophy{background:var(--ink);padding:0}
+.phil-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  border-left:1px solid rgba(255,255,255,.07);
+}
+.phil-item{
+  padding:52px 48px;
+  border-right:1px solid rgba(255,255,255,.07);
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+.phil-num{
+  font-family:var(--F);font-size:3rem;font-weight:300;
+  color:rgba(255,255,255,.08);line-height:1;font-style:italic;
+  margin-bottom:20px;
+}
+.phil-title{font-size:.72rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.75);margin-bottom:12px}
+.phil-body{font-size:.85rem;font-weight:300;color:rgba(255,255,255,.38);line-height:1.85}
+
+/* WHO WE SERVE */
+.serve-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:0;background:var(--sand);margin-top:56px;
+  border:1px solid var(--sand);
+}
+.serve-card{
+  background:var(--cream);padding:52px 44px;
+  position:relative;overflow:hidden;
+  transition:background .3s;cursor:default;
+}
+.serve-card:hover{background:#fff}
+.serve-card::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;
+  width:3px;background:var(--sage);
+  transform:scaleY(0);transition:transform .35s;transform-origin:bottom;
+}
+.serve-card:hover::before{transform:scaleY(1)}
+.serve-num{
+  font-family:var(--F);font-size:4rem;font-weight:300;
+  color:var(--sand);line-height:1;font-style:italic;
+  margin-bottom:20px;transition:color .3s;
+}
+.serve-card:hover .serve-num{color:var(--sage-pale)}
+.serve-name{font-family:var(--F);font-size:1.5rem;font-weight:300;color:var(--ink);margin-bottom:12px;line-height:1.2}
+.serve-body{font-size:.84rem;font-weight:300;color:var(--ink2);line-height:1.9;margin-bottom:22px}
+.serve-link{
+  font-size:.68rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--sage);display:inline-flex;align-items:center;gap:8px;
+  cursor:pointer;background:none;border:none;font-family:var(--B);
+  transition:gap .2s;padding:0;
+}
+.serve-link:hover{gap:14px}
+
+/* HOME JOURNEY STRIP */
+.journey-strip{background:var(--ink2);padding:72px 0}
+.journey-steps{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:rgba(255,255,255,.06);margin-top:52px;
+}
+.jstep{background:rgba(255,255,255,.03);padding:40px 32px}
+.jstep-arrow{font-size:1.2rem;color:var(--sage-l);margin-bottom:20px;opacity:.7}
+.jstep-n{font-family:var(--F);font-size:.85rem;font-style:italic;color:var(--sage-l);margin-bottom:10px}
+.jstep-title{font-family:var(--F);font-size:1.2rem;font-weight:300;color:#fff;margin-bottom:10px;line-height:1.2}
+.jstep-body{font-size:.8rem;font-weight:300;color:rgba(255,255,255,.38);line-height:1.85}
+
+/* EDITORIAL BANNER */
+.editorial{
+  position:relative;height:540px;overflow:hidden;
+  display:flex;align-items:center;
+}
+.editorial img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 35%}
+.editorial::before{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:linear-gradient(95deg,rgba(42,38,32,.92) 0%,rgba(42,38,32,.5) 55%,rgba(42,38,32,.1) 100%);
+}
+.editorial-content{position:relative;z-index:2;padding:0 52px;max-width:700px}
+.editorial-content .lbl{color:rgba(170,200,160,.7)}
+.editorial-content .lbl::before{background:rgba(170,200,160,.5)}
+.editorial-content .h2{color:#fff;margin-bottom:20px}
+.editorial-content em{color:var(--blush)}
+.editorial-body{font-size:.97rem;font-weight:300;color:rgba(255,255,255,.58);line-height:1.85;max-width:520px;margin-bottom:36px}
+
+/* HOME TESTIMONIALS */
+.test-grid{
+  display:grid;grid-template-columns:1.2fr 1fr;
+  gap:0;background:var(--sand);margin-top:52px;
+}
+.tcard{background:var(--cream);padding:52px 48px}
+.tcard:nth-child(2){background:#fff}
+.tcard-tag{
+  font-size:.6rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--sage);border:1px solid rgba(92,112,82,.3);
+  padding:5px 14px;display:inline-block;margin-bottom:24px;
+}
+.tcard-quote{
+  font-family:var(--F);font-size:1.3rem;font-weight:300;
+  color:var(--ink);line-height:1.7;font-style:italic;margin-bottom:28px;
+}
+.tcard-meta{display:flex;align-items:center;gap:16px}
+.tcard-ava{width:46px;height:46px;border-radius:50%;object-fit:cover;object-position:top;flex-shrink:0}
+.tcard-name{font-size:.84rem;font-weight:400;color:var(--ink)}
+.tcard-info{font-size:.72rem;font-weight:300;color:var(--ink2);margin-top:3px}
+
+/* STATS */
+.stats-bar{background:var(--terra);padding:52px 0}
+.stats-grid{
+  max-width:1200px;margin:0 auto;padding:0 52px;
+  display:grid;grid-template-columns:repeat(5,1fr);
+  text-align:center;gap:0;
+}
+.stat{padding:0 20px;position:relative}
+.stat+.stat::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:1px;height:40px;background:rgba(255,255,255,.15)}
+.stat-n{font-family:var(--F);font-size:2.8rem;font-weight:300;color:#fff;display:block;font-style:italic;margin-bottom:6px}
+.stat-l{font-size:.65rem;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+
+/* HOME FOOTER */
+.site-footer{background:var(--ink);padding:72px 0 36px}
+.footer-grid{
+  display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;
+  gap:52px;margin-bottom:56px;
+  padding-bottom:48px;
+  border-bottom:1px solid rgba(75, 64, 64, 0.07);
+}
+.footer-logo{font-family:var(--F);font-size:1.6rem;font-weight:300;color:#fff;margin-bottom:14px;letter-spacing:.04em}
+.footer-logo em{color:var(--sage-l);font-style:italic}
+.footer-desc{font-size:.83rem;font-weight:300;color:rgba(255,255,255,.34);line-height:1.85;max-width:260px;margin-bottom:24px}
+.footer-contact a{display:block;font-size:.8rem;font-weight:300;color:rgba(255,255,255,.42);text-decoration:none;margin-bottom:9px;transition:color .2s}
+.footer-contact a:hover{color:rgba(255,255,255,.8)}
+.footer-col h5{font-size:.6rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--sage-l);margin-bottom:20px}
+.footer-col ul{list-style:none}
+.footer-col li{margin-bottom:12px}
+.footer-col a{font-size:.82rem;font-weight:300;color:rgba(255,255,255,.34);text-decoration:none;transition:color .2s;cursor:pointer;background:none;border:none;font-family:var(--B);padding:0}
+.footer-col a:hover,.footer-col button:hover{color:rgba(255,255,255,.8)}
+.footer-col button{font-size:.82rem;font-weight:300;color:rgba(255,255,255,.34);background:none;border:none;cursor:pointer;font-family:var(--B);transition:color .2s;padding:0}
+.footer-col button:hover{color:rgba(255,255,255,.8)}
+.footer-bot{display:flex;justify-content:space-between;align-items:center}
+.footer-copy{font-size:.7rem;font-weight:300;color:rgba(255,255,255,.18)}
+.footer-legal{display:flex;gap:24px}
+.footer-legal a{font-size:.68rem;font-weight:300;color:rgba(255,255,255,.18);text-decoration:none;transition:color .2s}
+.footer-legal a:hover{color:rgba(255,255,255,.5)}
+.divider-line{text-align:center;padding:16px 0;font-size:.85rem;letter-spacing:.5em;color:var(--sand-d);opacity:.35;margin-bottom:0}
+
+/* ═══════════════════════════════════════════════
+   ② RECONSTRUCTION VIEW
+═══════════════════════════════════════════════ */
+.pg-hero{
+  position:relative;overflow:hidden;
+  padding:100px 52px 80px;
+  background:var(--ink);
+}
+.pg-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.14}
+.pg-hero-inner{position:relative;z-index:1;max-width:700px}
+.pg-kicker{font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--sage-l);margin-bottom:20px;display:flex;align-items:center;gap:14px;font-weight:400}
+.pg-kicker::before{content:'';width:28px;height:1px;background:var(--sage-l)}
+.pg-title{font-family:var(--F);font-size:clamp(2.8rem,4.5vw,4.4rem);font-weight:300;color:#fff;line-height:1.06;margin-bottom:20px}
+.pg-title em{color:var(--blush)}
+.pg-intro{font-size:.97rem;font-weight:300;color:rgba(255,255,255,.5);line-height:1.9;max-width:540px}
+
+/* Category Filter */
+.cat-bar{
+  display:flex;gap:0;
+  border-bottom:1px solid var(--sand);
+  background:var(--cream);
+  position:sticky;top:var(--nav-h);z-index:100;
+}
+.cat-btn{
+  background:none;border:none;cursor:pointer;
+  font-family:var(--B);font-size:.7rem;font-weight:400;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink2);padding:18px 28px;
+  border-bottom:2px solid transparent;margin-bottom:-1px;
+  transition:color .2s,border-color .2s;
+}
+.cat-btn.active,.cat-btn:hover{color:var(--sage);border-bottom-color:var(--sage)}
+
+/* Procedure grid */
+.proc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;background:var(--sand)}
+.pcard{background:var(--cream);overflow:hidden;transition:background .3s}
+.pcard:hover{background:#fff}
+.pcard-img{height:220px;overflow:hidden;position:relative}
+.pcard-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s,filter .4s;filter:brightness(.75)}
+.pcard:hover .pcard-img img{transform:scale(1.05);filter:brightness(.9)}
+.pcard-cat{position:absolute;bottom:12px;left:14px;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.7);background:rgba(42,38,32,.6);padding:4px 10px}
+.pcard-body{padding:32px}
+.pcard-name{font-family:var(--F);font-size:1.3rem;font-weight:300;color:var(--ink);margin-bottom:6px}
+.pcard-price{font-size:.82rem;font-weight:400;color:var(--terra);margin-bottom:12px}
+.pcard-desc{font-size:.82rem;font-weight:300;color:var(--ink2);line-height:1.85;margin-bottom:20px}
+.pcard-btn{
+  font-size:.68rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--sage);background:none;border:1px solid rgba(92,112,82,.4);
+  padding:9px 20px;cursor:pointer;font-family:var(--B);
+  transition:background .2s,color .2s;
+}
+.pcard-btn:hover{background:var(--sage);color:#fff;border-color:var(--sage)}
+
+/* Disclaimer */
+.med-note{background:var(--blush-pale);border-left:3px solid var(--blush);padding:40px 48px;margin:0}
+.med-note p{font-size:.86rem;font-weight:300;color:var(--ink2);line-height:1.85}
+.med-note strong{font-weight:500;color:var(--ink)}
+
+/* ═══════════════════════════════════════════════
+   ③ RETREATS VIEW
+═══════════════════════════════════════════════ */
+.retreat-hero{
+  position:relative;height:60vh;min-height:480px;
+  display:flex;align-items:flex-end;overflow:hidden;
+}
+.retreat-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%}
+.retreat-hero::before{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(42,38,32,.9) 0%,rgba(42,38,32,.3) 50%,transparent 100%);z-index:1}
+.retreat-hero-content{position:relative;z-index:2;padding:0 52px 72px;max-width:680px}
+.retreat-hero-content .lbl{color:rgba(140,180,130,.7)}
+.retreat-hero-content .lbl::before{background:rgba(140,180,130,.5)}
+.retreat-hero-content .h1{color:#fff;margin-bottom:16px}
+.retreat-hero-content em{color:var(--blush)}
+.retreat-hero-intro{font-size:.97rem;font-weight:300;color:rgba(255,255,255,.55);line-height:1.85}
+
+/* Location cards alternating */
+.loc-block{display:grid;grid-template-columns:1fr 1fr;min-height:520px}
+.loc-block:nth-child(even){direction:rtl}
+.loc-block:nth-child(even)>*{direction:ltr}
+.loc-img{position:relative;overflow:hidden}
+.loc-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .7s}
+.loc-block:hover .loc-img img{transform:scale(1.04)}
+.loc-content{padding:72px 64px;background:var(--cream);display:flex;flex-direction:column;justify-content:center}
+.loc-tag{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--sage);font-weight:500;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.loc-tag::before{content:'';width:20px;height:1px;background:var(--sage)}
+.loc-name{font-family:var(--F);font-size:2.4rem;font-weight:300;color:var(--ink);margin-bottom:14px;line-height:1.1}
+.loc-name em{font-style:italic;color:var(--terra)}
+.loc-body{font-size:.88rem;font-weight:300;color:var(--ink2);line-height:1.9;margin-bottom:28px}
+.loc-features{display:flex;flex-direction:column;gap:9px;margin-bottom:32px}
+.loc-feat{font-size:.82rem;font-weight:300;color:var(--ink2);display:flex;align-items:center;gap:12px}
+.loc-feat::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--sage);flex-shrink:0}
+.btn-ghost{background:transparent;color:var(--ink);font-family:var(--B);font-size:.7rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;border:none;border-bottom:1px solid var(--sand-d);padding:11px 0;cursor:pointer;transition:color .2s,border-color .2s}
+.btn-ghost:hover{color:var(--sage);border-color:var(--sage)}
+
+/* Wellness menu */
+.wellness{background:var(--ink)}
+.well-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:rgba(255,255,255,.07);margin-top:48px}
+.well-item{background:rgba(255,255,255,.03);padding:36px 26px;text-align:center;transition:background .3s}
+.well-item:hover{background:rgba(255,255,255,.07)}
+.well-icon{font-size:1.4rem;margin-bottom:14px;display:block}
+.well-title{font-size:.72rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.72);line-height:1.4}
+.well-sub{font-size:.7rem;font-weight:300;color:rgba(255,255,255,.3);margin-top:5px}
+
+/* Packages */
+.pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;background:var(--sand);margin-top:52px}
+.pkg{background:var(--cream);padding:44px 36px;position:relative}
+.pkg.featured{background:var(--sage)}
+.pkg-badge{position:absolute;top:0;right:32px;background:var(--terra);color:#fff;font-size:.58rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:5px 14px}
+.pkg-name{font-family:var(--F);font-size:1.4rem;font-weight:300;color:var(--ink);margin-bottom:6px}
+.pkg.featured .pkg-name{color:#fff}
+.pkg-price{font-family:var(--F);font-size:2rem;font-weight:300;color:var(--terra);margin-bottom:4px;font-style:italic}
+.pkg.featured .pkg-price{color:rgba(255,255,255,.9)}
+.pkg-dur{font-size:.74rem;font-weight:300;color:var(--ink2);margin-bottom:24px}
+.pkg.featured .pkg-dur{color:rgba(255,255,255,.5)}
+.pkg-line{height:1px;background:var(--sand);margin-bottom:24px}
+.pkg.featured .pkg-line{background:rgba(255,255,255,.2)}
+.pkg-list{list-style:none;margin-bottom:28px;display:flex;flex-direction:column;gap:10px}
+.pkg-list li{font-size:.82rem;font-weight:300;color:var(--ink2);display:flex;gap:10px;line-height:1.6}
+.pkg.featured .pkg-list li{color:rgba(255,255,255,.75)}
+.pkg-list li::before{content:'✓';color:var(--sage);flex-shrink:0;font-size:.75rem;margin-top:2px}
+.pkg.featured .pkg-list li::before{color:rgba(255,255,255,.7)}
+.pkg-cta{
+  display:block;width:100%;padding:13px;text-align:center;
+  background:var(--ink);color:#fff;
+  font-family:var(--B);font-size:.7rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  border:none;cursor:pointer;transition:background .2s;text-decoration:none;
+}
+.pkg-cta:hover{background:var(--ink2)}
+.pkg.featured .pkg-cta{background:#fff;color:var(--sage)}
+.pkg.featured .pkg-cta:hover{background:var(--cream)}
+
+/* ═══════════════════════════════════════════════
+   ④ JOURNEY VIEW (how it works)
+═══════════════════════════════════════════════ */
+.tl-wrap{max-width:880px;margin:0 auto;padding:0 52px}
+.tl-item{display:grid;grid-template-columns:72px 1fr;gap:44px;padding:64px 0;border-bottom:1px solid var(--sand)}
+.tl-item:last-child{border-bottom:none}
+.tl-num{font-family:var(--F);font-size:3.2rem;font-weight:300;color:var(--sand);text-align:right;padding-top:6px;font-style:italic;line-height:1}
+.tl-tag{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--sage);margin-bottom:12px;display:flex;align-items:center;gap:10px;font-weight:500}
+.tl-tag::before{content:'';width:16px;height:1px;background:var(--sage)}
+.tl-title{font-family:var(--F);font-size:1.9rem;font-weight:300;color:var(--ink);margin-bottom:14px;line-height:1.15}
+.tl-body{font-size:.88rem;font-weight:300;color:var(--ink2);line-height:1.9;max-width:560px;margin-bottom:20px}
+.tl-chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-size:.68rem;font-weight:400;color:var(--ink2);background:var(--sage-pale);padding:5px 14px}
+.tl-dur{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sand-d);margin-top:14px;font-weight:400}
+
+/* Included grid */
+.incl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.08);margin-top:52px}
+.incl{background:rgba(255,255,255,.04);padding:36px 28px;transition:background .3s}
+.incl:hover{background:rgba(255,255,255,.08)}
+.incl-icon{font-size:1.2rem;margin-bottom:14px}
+.incl-title{font-size:.76rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.8);margin-bottom:8px}
+.incl-body{font-size:.78rem;font-weight:300;color:rgba(255,255,255,.36);line-height:1.8}
+
+/* FAQ */
+.faq-item{border-bottom:1px solid var(--sand)}
+.faq-q{
+  padding:22px 0;cursor:pointer;
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:.93rem;font-weight:300;color:var(--ink);
+  background:none;border:none;width:100%;text-align:left;font-family:var(--B);
+}
+.faq-arrow{font-family:var(--F);font-size:1.4rem;color:var(--sage);flex-shrink:0;transition:transform .3s;font-style:italic}
+.faq-item.open .faq-arrow{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.faq-item.open .faq-a{max-height:300px}
+.faq-a-inner{padding:0 0 22px;font-size:.86rem;font-weight:300;color:var(--ink2);line-height:1.85}
+
+/* ═══════════════════════════════════════════════
+   ⑤ ABOUT VIEW
+═══════════════════════════════════════════════ */
+.about-hero{display:grid;grid-template-columns:1fr 1fr;min-height:540px}
+.ah-left{background:var(--cream);padding:96px 72px;display:flex;flex-direction:column;justify-content:center}
+.ah-right{position:relative;overflow:hidden}
+.ah-right img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%}
+
+.manifesto-wrap{display:grid;grid-template-columns:1fr 1fr;gap:96px;align-items:center}
+.manifesto-quote{font-family:var(--F);font-size:clamp(1.8rem,2.8vw,2.5rem);font-weight:300;color:#fff;line-height:1.4;font-style:italic}
+.manifesto-quote em{color:var(--sage-l)}
+.manifesto-body p{font-size:.88rem;font-weight:300;color:rgba(255,255,255,.45);line-height:1.95;margin-bottom:18px}
+
+.doc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0;background:var(--sand);margin-top:52px}
+.doc-card{background:var(--cream);display:grid;grid-template-columns:180px 1fr;overflow:hidden;transition:background .3s}
+.doc-card:hover{background:#fff}
+.doc-photo{position:relative;overflow:hidden;min-height:220px}
+.doc-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;filter:grayscale(15%);transition:filter .4s,transform .4s}
+.doc-card:hover .doc-photo img{filter:grayscale(0%);transform:scale(1.04)}
+.doc-info{padding:36px}
+.doc-name{font-family:var(--F);font-size:1.35rem;font-weight:300;color:var(--ink);margin-bottom:4px}
+.doc-spec{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--sage);font-weight:500;margin-bottom:14px}
+.doc-bio{font-size:.82rem;font-weight:300;color:var(--ink2);line-height:1.85;margin-bottom:16px}
+.doc-creds{display:flex;flex-wrap:wrap;gap:6px}
+.doc-cred{font-size:.66rem;font-weight:400;color:var(--ink2);background:var(--sage-pale);padding:4px 12px}
+
+.clinic-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;background:var(--sand);margin-top:52px}
+.clinic{background:var(--cream);padding:52px 44px}
+.clinic-name{font-family:var(--F);font-size:1.6rem;font-weight:300;color:var(--ink);margin-bottom:4px}
+.clinic-loc{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--sage);font-weight:500;margin-bottom:18px}
+.clinic-body{font-size:.86rem;font-weight:300;color:var(--ink2);line-height:1.9;margin-bottom:24px}
+.clinic-certs{display:flex;gap:10px;flex-wrap:wrap}
+.clinic-cert{font-size:.65rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--sage);border:1px solid rgba(92,112,82,.4);padding:5px 14px}
+
+/* ═══════════════════════════════════════════════
+   ⑥ CONSULTATION VIEW
+═══════════════════════════════════════════════ */
+.consult-wrap{
+  min-height:calc(100vh - var(--nav-h));
+  display:grid;grid-template-columns:1fr 1fr;
+}
+.consult-form-side{background:var(--white);padding:72px 64px}
+.consult-info-side{
+  background:var(--ink);
+  position:relative;overflow:hidden;
+  padding:72px 60px;display:flex;flex-direction:column;justify-content:space-between;
+}
+.consult-info-side img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.12}
+.consult-info-inner{position:relative;z-index:1}
+.form-kicker{font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--sage);margin-bottom:20px;display:flex;align-items:center;gap:14px;font-weight:500}
+.form-kicker::before{content:'';width:24px;height:1px;background:var(--sage)}
+.form-title{font-family:var(--F);font-size:2.6rem;font-weight:300;color:var(--ink);line-height:1.08;margin-bottom:10px}
+.form-sub{font-size:.88rem;font-weight:300;color:var(--ink2);margin-bottom:36px;line-height:1.75}
+.fg{margin-bottom:16px}
+.fg label{display:block;font-size:.66rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);margin-bottom:7px}
+.fg input,.fg select,.fg textarea{
+  width:100%;border:1px solid var(--sand-d);
+  padding:12px 14px;
+  font-family:var(--B);font-size:.9rem;color:var(--ink);
+  background:#fff;outline:none;
+  transition:border-color .2s;font-weight:300;
+  -webkit-appearance:none;appearance:none;
+  border-radius:0;
+}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--sage)}
+.fg textarea{resize:vertical;min-height:100px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fsub{
+  width:100%;padding:15px;background:var(--sage);color:#fff;
+  border:none;font-family:var(--B);font-size:.76rem;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;
+  cursor:pointer;margin-top:8px;transition:background .2s;
+}
+.fsub:hover{background:var(--sage-l)}
+.fsub:disabled{opacity:.6;cursor:not-allowed}
+.f-note{font-size:.73rem;font-weight:300;color:var(--ink2);text-align:center;margin-top:12px;line-height:1.6}
+.f-err{color:var(--terra);font-size:.78rem;margin-top:8px;display:none}
+.f-err.show{display:block}
+.f-success{background:var(--sage-pale);border:1px solid rgba(92,112,82,.3);padding:36px;text-align:center;display:none}
+.f-success.show{display:block}
+.f-success h3{font-family:var(--F);font-size:1.8rem;font-weight:300;color:var(--ink);margin-bottom:10px}
+.f-success p{font-size:.88rem;font-weight:300;color:var(--ink2);line-height:1.8}
+
+.info-title{font-family:var(--F);font-size:2.2rem;font-weight:300;color:#fff;line-height:1.2;margin-bottom:16px}
+.info-title em{font-style:italic;color:var(--blush)}
+.info-body{font-size:.86rem;font-weight:300;color:rgba(255,255,255,.45);line-height:1.9;margin-bottom:44px}
+.promise{padding:22px 0;border-bottom:1px solid rgba(255,255,255,.07);display:flex;gap:16px;align-items:flex-start}
+.promise:first-of-type{border-top:1px solid rgba(255,255,255,.07)}
+.promise-icon{font-size:1rem;flex-shrink:0;width:26px;text-align:center;margin-top:1px}
+.promise h4{font-size:.74rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.75);margin-bottom:4px}
+.promise p{font-size:.78rem;font-weight:300;color:rgba(255,255,255,.35);line-height:1.7}
+.info-contact{margin-top:36px;position:relative;z-index:1}
+.info-contact p{font-size:.78rem;font-weight:300;color:rgba(255,255,255,.3);margin-bottom:10px}
+.info-contact a{display:block;font-size:.84rem;font-weight:300;color:rgba(255,255,255,.6);text-decoration:none;margin-bottom:7px;transition:color .2s}
+.info-contact a:hover{color:#fff}
+
+/* ═══════════════════════════════════════════════
+   SHARED CTA BLOCK
+═══════════════════════════════════════════════ */
+.cta-block{background:var(--terra);padding:88px 0;text-align:center}
+.cta-block .lbl{justify-content:center;color:rgba(255,255,255,.55)}
+.cta-block .lbl::before{background:rgba(255,255,255,.35)}
+.cta-block .h2{color:#fff;margin-bottom:20px}
+.cta-block em{color:rgba(255,255,255,.8)}
+.cta-body{font-size:.97rem;font-weight:300;color:rgba(255,255,255,.65);max-width:440px;margin:0 auto 36px;line-height:1.9}
+
+/* ═══════════════════════════════════════════════
+   ANIMATIONS
+═══════════════════════════════════════════════ */
+.rev{opacity:0;transform:translateY(22px);transition:opacity .7s,transform .7s}
+.rev.on{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+/* ═══════════════════════════════════════════════
+   MOBILE NAV
+═══════════════════════════════════════════════ */
+.mobile-menu{
+  display:none;position:fixed;top:var(--nav-h);left:0;right:0;
+  background:var(--cream);border-bottom:1px solid var(--sand);
+  z-index:800;padding:16px 0;
+}
+.mobile-menu.open{display:block}
+.mobile-menu .nav-btn{
+  display:flex;width:100%;height:auto;padding:16px 28px;
+  border-bottom:1px solid rgba(0,0,0,.04);
+}
+.mobile-menu .nav-cta{margin:16px 28px;display:block;text-align:center}
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════ */
+@media(max-width:1100px){
+  .about-hero{grid-template-columns:1fr}
+  .ah-right{display:none}
+  .manifesto-wrap{grid-template-columns:1fr;gap:44px}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .stats-grid{grid-template-columns:repeat(3,1fr);gap:24px}
+  .stat+.stat::before{display:none}
+  .well-grid{grid-template-columns:repeat(3,1fr)}
+  .incl-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:900px){
+  .nav-center{display:none}
+  .burger{display:flex}
+  .proc-grid{grid-template-columns:repeat(2,1fr)}
+  .phil-grid{grid-template-columns:1fr}
+  .serve-grid{grid-template-columns:1fr}
+  .journey-steps{grid-template-columns:repeat(2,1fr)}
+  .test-grid{grid-template-columns:1fr}
+  .doc-grid{grid-template-columns:1fr}
+  .clinic-grid{grid-template-columns:1fr}
+  .consult-wrap{grid-template-columns:1fr}
+  .consult-info-side{display:none}
+  .loc-block{grid-template-columns:1fr;direction:ltr!important}
+  .loc-img{min-height:280px}
+  .pg-hero{padding:80px 28px 60px}
+  .tl-wrap{padding:0 28px}
+}
+@media(max-width:600px){
+  .nav-wrap{padding:0 24px}
+  .container{padding:0 24px}
+  .hero-left{padding:52px 24px}
+  .proc-grid{grid-template-columns:1fr}
+  .pkg-grid{grid-template-columns:1fr}
+  .well-grid{grid-template-columns:repeat(2,1fr)}
+  .incl-grid{grid-template-columns:1fr 1fr}
+  .doc-card{grid-template-columns:1fr}
+  .doc-photo{min-height:220px}
+  .stats-grid{grid-template-columns:repeat(2,1fr);padding:0 24px}
+  .footer-grid{grid-template-columns:1fr;padding:0 24px}
+  .sec{padding:60px 0}
+  .journey-steps{grid-template-columns:1fr}
+  .frow{grid-template-columns:1fr}
+  .consult-form-side{padding:48px 24px}
+  .tl-item{grid-template-columns:1fr;gap:14px}
+  .tl-num{text-align:left;font-size:2.5rem}
+  .tl-wrap{padding:0 24px}
+}
+/* ═══════════════════════════════════════════════
+   ⑦ STAY & RESTORE
+═══════════════════════════════════════════════ */
+.stay-hero{position:relative;height:74vh;min-height:520px;overflow:hidden;display:flex;align-items:flex-end}
+.stay-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 38%}
+.stay-hero::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(170deg,rgba(42,38,32,.08) 0%,rgba(42,38,32,.7) 55%,rgba(42,38,32,.96) 100%)}
+.stay-hero-content{position:relative;z-index:2;padding:0 52px 72px;max-width:860px}
+.stay-hero-content .lbl{color:rgba(170,200,160,.7)}
+.stay-hero-content .lbl::before{background:rgba(140,180,130,.5)}
+.stay-hero-content .h1{color:#fff;margin-bottom:18px}
+.stay-hero-content em{color:var(--blush)}
+.stay-hero-intro{font-size:.95rem;font-weight:300;color:rgba(255,255,255,.5);line-height:1.9;max-width:580px;margin-bottom:32px}
+.stay-tabs{display:flex;gap:0;flex-wrap:wrap}
+.stay-tab{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);color:rgba(255,255,255,.55);font-family:var(--B);font-size:.68rem;font-weight:400;letter-spacing:.14em;text-transform:uppercase;padding:12px 26px;cursor:pointer;transition:all .25s}
+.stay-tab:hover,.stay-tab.active{background:var(--sage);border-color:var(--sage);color:#fff}
+.stay-section{display:none}
+.stay-section.active{display:block}
+
+/* Stats bar for Stay */
+.stay-stats{background:var(--ink2);padding:40px 0}
+.stay-stats .stats-grid{grid-template-columns:repeat(5,1fr)}
+
+/* Region / filter bar */
+.region-bar{background:var(--cream);border-bottom:1px solid var(--sand);display:flex;gap:0;align-items:center;padding:0 52px;position:sticky;top:var(--nav-h);z-index:99;overflow-x:auto}
+.region-label{font-size:.58rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--sand-d);padding:16px 20px 16px 0;border-right:1px solid var(--sand);margin-right:4px;white-space:nowrap;flex-shrink:0}
+.region-btn{background:none;border:none;cursor:pointer;font-family:var(--B);font-size:.66rem;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);padding:16px 18px;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .2s,border-color .2s;white-space:nowrap}
+.region-btn.active,.region-btn:hover{color:var(--sage);border-bottom-color:var(--sage)}
+
+/* Hotel grid */
+.hotel-intro-wrap{background:var(--cream);padding:64px 0 0}
+.hotel-intro-inner{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start;padding-bottom:52px;border-bottom:1px solid var(--sand)}
+.hotel-intro-aside{font-size:.84rem;font-weight:300;color:var(--ink2);line-height:1.9;border-left:2px solid var(--sage);padding-left:24px}
+.hotel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;background:var(--sand)}
+.hcard{background:var(--cream);overflow:hidden;display:flex;flex-direction:column;transition:background .3s}
+.hcard:hover{background:#fff}
+.hcard-img{height:230px;overflow:hidden;position:relative}
+.hcard-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.hcard:hover .hcard-img img{transform:scale(1.04)}
+.hcard-badge{position:absolute;top:14px;left:14px;background:var(--ink);color:rgba(255,255,255,.8);font-size:.56rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;padding:5px 11px}
+.hcard-body{padding:26px 28px 30px;flex:1;display:flex;flex-direction:column}
+.hcard-loc{font-size:.62rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--sage);margin-bottom:8px}
+.hcard-name{font-family:var(--F);font-size:1.3rem;font-weight:300;color:var(--ink);line-height:1.2;margin-bottom:10px}
+.hcard-desc{font-size:.82rem;font-weight:300;color:var(--ink2);line-height:1.85;margin-bottom:16px;flex:1}
+.hcard-feats{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:18px}
+.hcard-feat{font-size:.57rem;font-weight:400;letter-spacing:.09em;text-transform:uppercase;border:1px solid rgba(92,112,82,.26);color:var(--sage);padding:4px 9px}
+.hcard-price{font-size:.78rem;font-weight:300;color:var(--ink2);margin-bottom:14px}
+.hcard-price strong{font-weight:500;color:var(--ink)}
+.hcard-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:auto}
+.hcard-book{font-size:.64rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;background:var(--sage);color:#fff;padding:10px 18px;text-decoration:none;transition:background .2s;display:inline-block}
+.hcard-book:hover{background:var(--sage-l)}
+.hcard-add{font-size:.63rem;font-weight:400;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);border:1px solid var(--sand-d);padding:9px 16px;cursor:pointer;background:none;font-family:var(--B);transition:all .2s}
+.hcard-add:hover{border-color:var(--sage);color:var(--sage)}
+
+/* Specialist section */
+.spec-section{background:var(--ink);padding:80px 0}
+.spec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;background:rgba(255,255,255,.04);margin-top:48px}
+.scard{background:rgba(255,255,255,.02);padding:42px 34px;border-right:1px solid rgba(255,255,255,.05);transition:background .3s}
+.scard:last-child{border-right:none}
+.scard:hover{background:rgba(255,255,255,.05)}
+.scard-emoji{font-size:1.8rem;margin-bottom:18px}
+.scard-disc{font-size:.58rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--sage-l);margin-bottom:8px}
+.scard-name{font-family:var(--F);font-size:1.35rem;font-weight:300;color:#fff;line-height:1.2;margin-bottom:6px}
+.scard-loc{font-size:.72rem;font-weight:300;color:rgba(255,255,255,.28);margin-bottom:12px}
+.scard-bio{font-size:.81rem;font-weight:300;color:rgba(255,255,255,.36);line-height:1.85;margin-bottom:18px}
+.scard-methods{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:20px}
+.scard-method{font-size:.57rem;font-weight:400;letter-spacing:.09em;text-transform:uppercase;border:1px solid rgba(92,112,82,.32);color:var(--sage-l);padding:4px 9px}
+.scard-btn{font-size:.67rem;font-weight:400;letter-spacing:.1em;text-transform:uppercase;background:rgba(92,112,82,.18);color:var(--sage-l);border:none;padding:10px 18px;cursor:pointer;font-family:var(--B);transition:background .2s}
+.scard-btn:hover{background:rgba(92,112,82,.32)}
+
+/* Travel section */
+.travel-section{background:var(--cream);padding:80px 0}
+.travel-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;background:var(--sand);margin-top:48px}
+.tcol{background:var(--cream);padding:48px 44px}
+.tcol:nth-child(2){background:#fff}
+.tcol h3{font-family:var(--F);font-size:1.55rem;font-weight:300;color:var(--ink);margin-bottom:8px;line-height:1.2}
+.tcol em{color:var(--terra)}
+.tcol>p{font-size:.85rem;font-weight:300;color:var(--ink2);line-height:1.85;margin-bottom:24px}
+.flight-links{display:flex;flex-direction:column;gap:10px}
+.flink{display:flex;align-items:center;gap:14px;padding:14px 18px;border:1px solid var(--sand);background:var(--cream);text-decoration:none;transition:all .2s}
+.flink:hover{border-color:var(--sage);background:#fff}
+.flink-icon{font-size:1.3rem;width:28px;text-align:center;flex-shrink:0}
+.flink-name{font-size:.78rem;font-weight:500;color:var(--ink)}
+.flink-routes{font-size:.7rem;font-weight:300;color:var(--ink2);margin-top:2px}
+.flink-arr{margin-left:auto;font-size:.62rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--sage)}
+.visa-box{background:var(--sage-pale);border:1px solid rgba(92,112,82,.18);padding:24px;margin-top:24px}
+.visa-box h4{font-size:.68rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--sage);margin-bottom:10px}
+.visa-box li{font-size:.8rem;font-weight:300;color:var(--ink2);line-height:1.9;margin-left:16px}
+.transfer-list{display:flex;flex-direction:column;margin-top:0}
+.titem{padding:18px 0;border-bottom:1px solid var(--sand);display:flex;gap:14px;align-items:flex-start}
+.titem:first-child{border-top:1px solid var(--sand)}
+.titem-icon{font-size:1.1rem;flex-shrink:0;width:24px;text-align:center;margin-top:2px}
+.titem-title{font-size:.78rem;font-weight:500;color:var(--ink);margin-bottom:3px}
+.titem-desc{font-size:.76rem;font-weight:300;color:var(--ink2);line-height:1.7}
+.titem-price{font-size:.7rem;font-weight:400;color:var(--sage);margin-top:3px}
+
+/* Responsive additions */
+@media(max-width:1100px){
+  .hotel-intro-inner{grid-template-columns:1fr}
+  .hotel-grid{grid-template-columns:repeat(2,1fr)}
+  .spec-grid{grid-template-columns:1fr}
+  .scard{border-right:none;border-bottom:1px solid rgba(255,255,255,.05)}
+  .travel-grid{grid-template-columns:1fr}
+  .stay-stats .stats-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:700px){
+  .stay-hero-content{padding:0 24px 52px}
+  .hotel-grid{grid-template-columns:1fr}
+  .region-bar{padding:0 14px}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════ NAV ══════════ -->
+<nav>
+  <div class="nav-wrap">
+    <a class="logo" onclick="show('home')">Ha<em>Yet</em><sup>Tunisia</sup></a>
+    <div class="nav-center">
+      <button class="nav-btn" id="nb-home"    onclick="show('home')">Home</button>
+      <button class="nav-btn" id="nb-recon"   onclick="show('reconstruction')">Reconstruction</button>
+      <button class="nav-btn" id="nb-retreat" onclick="show('retreat')">Retreats</button>
+      <button class="nav-btn" id="nb-stay"    onclick="show('stay')" style="color:var(--terra)">Stay & Restore ✦</button>
+      <button class="nav-btn" id="nb-journey" onclick="show('journey')">Your Journey</button>
+      <button class="nav-btn" id="nb-about"   onclick="show('about')">About</button>
+    </div>
+    <div class="nav-right">
+      <button class="nav-cta" onclick="show('consult')">Begin Your Journey</button>
+      <button class="burger" id="burgerBtn" onclick="toggleMobile()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="nav-btn" onclick="show('home');toggleMobile()">Home</button>
+  <button class="nav-btn" onclick="show('reconstruction');toggleMobile()">Reconstruction</button>
+  <button class="nav-btn" onclick="show('retreat');toggleMobile()">Retreats</button>
+  <button class="nav-btn" onclick="show('stay');toggleMobile()" style="color:var(--terra)">Stay & Restore ✦</button>
+  <button class="nav-btn" onclick="show('journey');toggleMobile()">Your Journey</button>
+  <button class="nav-btn" onclick="show('about');toggleMobile()">About</button>
+  <button class="nav-cta" onclick="show('consult');toggleMobile()">Begin Your Journey</button>
+</div>
+
+<!-- ══════════════════════════════════════════
+     ① HOME
+══════════════════════════════════════════ -->
+<div class="view active" id="view-home">
+
+  <!-- HERO SLIDESHOW -->
+  <div class="hero-slides" id="heroSlides">
+    <!-- Slide 1 — Reconstruction -->
+    <div class="hslide active" data-index="0">
+<div class="hslide-bg" style="background-image:url('bg1\ .jpg')"></div>
+      <div class="hslide-overlay"></div>
+      <div class="hslide-content">
+        <div class="hslide-kicker">Reconstruction · Tunisia</div>
+        <h1 class="hslide-title">Your body.<br/><em>Your journey back.</em></h1>
+        <p class="hslide-body">World-class surgery for those who've been through an accident, illness, or transformation — at up to 60% less than European prices.</p>
+        <div class="hslide-actions">
+          <button class="btn btn-sage" onclick="show('reconstruction')">Explore Surgery</button>
+          <button class="hslide-ghost" onclick="show('consult')">Free Consultation</button>
+        </div>
+      </div>
+    </div>
+    <!-- Slide 2 — Retreats -->
+    <div class="hslide" data-index="1">
+<div class="hslide-bg" style="background-image:url('bg2.jpg')"></div>
+      <div class="hslide-overlay"></div>
+      <div class="hslide-content">
+        <div class="hslide-kicker">Regenerative Retreats · Hammamet · Ain Draham · Tozeur</div>
+        <h1 class="hslide-title">Healing is not<br/><em>passive.</em></h1>
+        <p class="hslide-body">Three profoundly different environments — the sea, the forest, the desert — each designed to restore what surgery begins.</p>
+        <div class="hslide-actions">
+          <button class="btn btn-sage" onclick="show('retreat')">Discover Retreats</button>
+          <button class="hslide-ghost" onclick="show('consult')">Free Consultation</button>
+        </div>
+      </div>
+    </div>
+    <!-- Slide 3 — Stay & Restore -->
+    <div class="hslide" data-index="2">
+      <div class="hslide-bg" style="background-image:url('bg3.jpg')"></div>
+      <div class="hslide-overlay"></div>
+      <div class="hslide-content">
+        <div class="hslide-kicker">Stay & Restore · Hotels · Specialists · Flights</div>
+        <h1 class="hslide-title">Surgery heals the body.<br/><em>Where you rest</em> heals the soul.</h1>
+        <p class="hslide-body">Curated maisons d'hôtes, wellness specialists, and private transfers. One continuous journey — fully held.</p>
+        <div class="hslide-actions">
+          <button class="btn btn-sage" onclick="show('stay')">Explore Stays</button>
+          <button class="hslide-ghost" onclick="show('consult')">Free Consultation</button>
+        </div>
+      </div>
+    </div>
+    <!-- Slide 4 — About -->
+    <div class="hslide" data-index="3">
+      <div class="hslide-bg" style="background-image:url('d1.jpg')"></div>
+      <div class="hslide-overlay"></div>
+      <div class="hslide-content">
+        <div class="hslide-kicker">About Hayet · Tunisia's First Holistic Centre</div>
+        <h1 class="hslide-title">Built for<br/><em>hard stories.</em></h1>
+        <p class="hslide-body">Four European-trained surgeons. Two JCI-accredited clinics. A care team that speaks your language and holds your hand every step of the way.</p>
+        <div class="hslide-actions">
+          <button class="btn btn-sage" onclick="show('about')">Meet the Team</button>
+          <button class="hslide-ghost" onclick="show('consult')">Free Consultation</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="hslide-controls">
+      <button class="hslide-arrow hslide-prev" onclick="slideMove(-1)" aria-label="Previous">&#8592;</button>
+      <div class="hslide-dots" id="slideDots">
+        <button class="sdot active" onclick="slideTo(0)"></button>
+        <button class="sdot" onclick="slideTo(1)"></button>
+        <button class="sdot" onclick="slideTo(2)"></button>
+        <button class="sdot" onclick="slideTo(3)"></button>
+      </div>
+      <button class="hslide-arrow hslide-next" onclick="slideMove(1)" aria-label="Next">&#8594;</button>
+    </div>
+
+    <!-- Progress bar -->
+    <div class="hslide-progress"><div class="hslide-bar" id="slideBar"></div></div>
+
+    <!-- Slide counter -->
+    <div class="hslide-counter"><span id="slideNum">01</span> / 04</div>
+
+    <!-- Scroll hint -->
+    <div class="hslide-scroll-hint">Scroll to discover</div>
+
+    <!-- Side strip -->
+    <div class="hslide-strip">
+      <div class="hslide-strip-seg active" id="seg0"></div>
+      <div class="hslide-strip-seg" id="seg1"></div>
+      <div class="hslide-strip-seg" id="seg2"></div>
+      <div class="hslide-strip-seg" id="seg3"></div>
+    </div>
+  </div>
+
+  <!-- PHILOSOPHY -->
+  <div class="philosophy">
+    <div class="phil-grid">
+      <div class="phil-item rev">
+        <div class="phil-num">01</div>
+        <div class="phil-title">Restore</div>
+        <p class="phil-body">Surgery for post-accident reconstruction, weight loss body contouring, illness recovery, bariatric care, dental, hair, and more. Tunisia's finest surgeons — at up to 60% less than European prices.</p>
+      </div>
+      <div class="phil-item rev d1">
+        <div class="phil-num">02</div>
+        <div class="phil-title">Rebuild</div>
+        <p class="phil-body">A personalised care programme — nutrition, pre-op preparation, post-surgical support, and specialist wellness practitioners designed around your specific journey.</p>
+      </div>
+      <div class="phil-item rev d2">
+        <div class="phil-num">03</div>
+        <div class="phil-title">Renew</div>
+        <p class="phil-body">Hand-curated maisons d'hôtes and boutique hotels by the sea, in the forest, or in the desert — with yoga instructors, therapists, and holistic specialists who understand exactly what you've been through.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHO WE SERVE -->
+  <section class="sec" style="background:var(--cream)">
+    <div class="container">
+      <div class="lbl rev">Who we serve</div>
+      <h2 class="h2 rev">We're here for <em>every story</em></h2>
+      <div class="serve-grid" style="grid-template-columns:repeat(3,1fr)">
+        <div class="serve-card rev">
+          <div class="serve-num">I</div>
+          <h3 class="serve-name">Post-Accident<br/>Reconstruction</h3>
+          <p class="serve-body">Burns, scars, trauma deformities — we work with Tunisia's leading reconstructive surgeons to restore form, function, and confidence after accident or injury.</p>
+          <button class="serve-link" onclick="show('reconstruction');filterCat('accident')">Explore procedures →</button>
+        </div>
+        <div class="serve-card rev d1">
+          <div class="serve-num">II</div>
+          <h3 class="serve-name">Weight Loss &<br/>Body Transformation</h3>
+          <p class="serve-body">After bariatric surgery or major weight loss, excess skin holds back your confidence. Body lifts, tummy tucks, arm lifts — your transformation, completed. Prices 50–60% below European rates.</p>
+          <button class="serve-link" onclick="show('reconstruction');filterCat('weight')">Explore procedures →</button>
+        </div>
+        <div class="serve-card rev d2">
+          <div class="serve-num">III</div>
+          <h3 class="serve-name">Illness &<br/>Life Change</h3>
+          <p class="serve-body">Mastectomy reconstruction, post-illness restoration, ptosis repair. We treat the whole person. Surgery is one part of a longer, deeper journey back to yourself.</p>
+          <button class="serve-link" onclick="show('reconstruction');filterCat('illness')">Explore procedures →</button>
+        </div>
+        <div class="serve-card rev">
+          <div class="serve-num">IV</div>
+          <h3 class="serve-name">Bariatric &<br/>Obesity Surgery</h3>
+          <p class="serve-body">Sleeve gastrectomy, gastric bypass, gastric band. World-class bariatric surgeons at a fraction of European costs, with full nutritional and psychological support before and after.</p>
+          <button class="serve-link" onclick="show('reconstruction');filterCat('bariatric')">Explore procedures →</button>
+        </div>
+        <div class="serve-card rev d1">
+          <div class="serve-num">V</div>
+          <h3 class="serve-name">Hair Restoration &<br/>Aesthetic Renewal</h3>
+          <p class="serve-body">FUE/DHI hair transplants, rhinoplasty, facial rejuvenation. Tunisia is one of Europe's top destinations for hair restoration — and for good reason. Natural results, expert hands, restorative retreat included.</p>
+          <button class="serve-link" onclick="show('reconstruction');filterCat('aesthetic')">Explore procedures →</button>
+        </div>
+        <div class="serve-card rev d2">
+          <div class="serve-num">VI</div>
+          <h3 class="serve-name">Wellness-Only<br/>Retreat</h3>
+          <p class="serve-body">No surgery needed. Come for the holistic regenerative experience — yoga by the sea, somatic therapy in the cork forests, mineral pools in the desert. A reset for body and mind.</p>
+          <button class="serve-link" onclick="show('stay')">Explore Stay & Restore →</button>
+        </div>
+      </div>
+      <p style="display:none" class="serve-scroll-hint-mobile">← swipe to explore →</p>
+    </div>
+  </section>
+
+  <!-- JOURNEY STRIP -->
+  <div class="journey-strip">
+    <div class="container">
+      <div class="lbl rev" style="color:rgba(140,180,130,.6)"><span style="display:block;width:28px;height:1px;background:rgba(140,180,130,.4)"></span>The Hayet Method</div>
+      <h2 class="h2 rev" style="color:#fff;margin-bottom:4px">One <em>continuous</em> arc of care</h2>
+      <div class="journey-steps">
+        <div class="jstep rev">
+          <div class="jstep-arrow">◈</div>
+          <div class="jstep-n">Step one</div>
+          <div class="jstep-title">Private Consultation</div>
+          <p class="jstep-body">Free, confidential video call. Your surgeon and care coordinator listen first, then design your programme.</p>
+        </div>
+        <div class="jstep rev d1">
+          <div class="jstep-arrow">◈</div>
+          <div class="jstep-n">Step two</div>
+          <div class="jstep-title">Arrival & Preparation</div>
+          <p class="jstep-body">Private airport transfer, 5★ hotel, pre-operative nutrition protocol, and a day of rest.</p>
+        </div>
+        <div class="jstep rev d2">
+          <div class="jstep-arrow">◈</div>
+          <div class="jstep-n">Step three</div>
+          <div class="jstep-title">Surgery & Recovery</div>
+          <p class="jstep-body">JCI-accredited clinic. 24/7 nursing. Daily surgeon visits. You are never without someone who knows your name.</p>
+        </div>
+        <div class="jstep rev d3">
+          <div class="jstep-arrow">◈</div>
+          <div class="jstep-n">Step four</div>
+          <div class="jstep-title">Stay & Restore</div>
+          <p class="jstep-body">We book your maison d'hôtes or boutique hotel — by the sea, in the forest, or desert. A yoga therapist, somatic specialist, or nutritionist meets you there. Everything is arranged.</p>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:48px">
+        <button class="btn btn-outline" style="border-color:rgba(255,255,255,.2);color:rgba(255,255,255,.6)" onclick="show('journey')">Read the full journey →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- EDITORIAL -->
+  <div class="editorial">
+    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80" alt="Retreat"/>
+    <div class="editorial-content">
+      <div class="lbl rev">Regenerative retreats</div>
+      <h2 class="h2 rev">Where recovery<br/>becomes <em>renewal</em></h2>
+      <p class="editorial-body rev">The Mediterranean, the cork forests of Ain Draham, the silence of the Sahara. Three profoundly different environments, one purpose: to help your body and spirit recover fully after surgery.</p>
+      <button class="btn btn-terra rev" onclick="show('retreat')">Discover our retreats</button>
+    </div>
+  </div>
+
+  <!-- TESTIMONIALS -->
+  <section class="sec" style="background:var(--cream)">
+    <div class="container">
+      <div class="lbl rev">Patient voices</div>
+      <h2 class="h2 rev">Stories of <em>transformation</em></h2>
+      <div class="test-grid">
+        <div class="tcard rev">
+          <div class="tcard-tag">Post-accident · Facial Reconstruction</div>
+          <p class="tcard-quote">"After my car accident I didn't recognise myself in the mirror. Hayet gave me back my face — and the retreat in Hammamet gave me back my sense of peace."</p>
+          <div class="tcard-meta">
+            <img class="tcard-ava" src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=100&q=80" alt=""/>
+            <div>
+              <div class="tcard-name">Nadia L.</div>
+              <div class="tcard-info">🇫🇷 Lyon, France · Facial reconstruction</div>
+            </div>
+          </div>
+        </div>
+        <div class="tcard rev d1">
+          <div class="tcard-tag">Weight Loss · Body Contouring</div>
+          <p class="tcard-quote">"I lost 68kg. The body contouring at Hayet was the final chapter of that journey. The retreat week afterwards was the most healing week of my entire life."</p>
+          <div class="tcard-meta">
+            <img class="tcard-ava" src="https://images.unsplash.com/photo-1500048993953-d23a436266cf?w=100&q=80" alt=""/>
+            <div>
+              <div class="tcard-name">James R.</div>
+              <div class="tcard-info">🇬🇧 Manchester, UK · Body contouring</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-bar">
+    <div class="stats-grid">
+      <div class="stat"><span class="stat-n">2M+</span><span class="stat-l">Foreign Patients / Year</span></div>
+      <div class="stat"><span class="stat-n">50%</span><span class="stat-l">Lower Cost vs. Europe</span></div>
+      <div class="stat"><span class="stat-n">#1</span><span class="stat-l">Africa Medical Tourism</span></div>
+      <div class="stat"><span class="stat-n">€1B+</span><span class="stat-l">Annual Sector Revenue</span></div>
+      <div class="stat"><span class="stat-n">200+</span><span class="stat-l">Accredited Clinics</span></div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-block">
+    <div class="lbl">Begin today</div>
+    <h2 class="h2">Your story isn't over.<br/>It's <em>just beginning.</em></h2>
+    <p class="cta-body">A free, private consultation — no commitment. Just an honest conversation about what's possible.</p>
+    <button class="btn btn-white" onclick="show('consult')">Book Free Consultation</button>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">Re<em>Nova</em></div>
+          <p class="footer-desc">Tunisia's first holistic aesthetic reconstruction and regenerative wellness centre. Restore. Rebuild. Renew.</p>
+          <div class="footer-contact">
+            <a href="tel:+21654025402">📞 +216 54 02 54 02</a>
+            <a href="tel:+33760577477">📞 +33 7 60 577 477</a>
+            <a href="/cdn-cgi/l/email-protection#ed8588818182ad9f8883829b8c8e8c9f88c38e8280">✉️ <span class="__cf_email__" data-cfemail="0f676a6363604f7d6a6160796e6c6e7d6a216c6062">[email&#160;protected]</span></a>
+            <a href="https://wa.me/21654025402" target="_blank">💬 WhatsApp us</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h5>Reconstruction</h5>
+          <ul>
+            <li><button onclick="show('reconstruction');filterCat('accident')">Post-Accident</button></li>
+            <li><button onclick="show('reconstruction');filterCat('weight')">Weight Loss Body</button></li>
+            <li><button onclick="show('reconstruction');filterCat('illness')">Illness Recovery</button></li>
+            <li><button onclick="show('reconstruction');filterCat('all')">All Procedures</button></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Stay & Restore</h5>
+          <ul>
+            <li><button onclick="show('stay');switchStay('hotels')">Hotels & Maisons d'Hôtes</button></li>
+            <li><button onclick="show('stay');switchStay('specialists')">Wellness Specialists</button></li>
+            <li><button onclick="show('stay');switchStay('travel')">Flights & Transfers</button></li>
+            <li><button onclick="show('retreat')">Retreat Packages</button></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Centre</h5>
+          <ul>
+            <li><button onclick="show('about')">Our Surgeons</button></li>
+            <li><button onclick="show('about')">Our Clinics</button></li>
+            <li><button onclick="show('journey')">How It Works</button></li>
+            <li><button onclick="show('consult')">Free Consultation</button></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="divider-line">✦ ◆ ✦ ◆ ✦</div>
+      <div class="footer-bot" style="margin-top:20px">
+        <span class="footer-copy">© 2025 Hayet Care. All rights reserved.</span>
+        <div class="footer-legal">
+          <a href="#">Privacy</a><a href="#">Terms</a><a href="#">Medical Disclaimer</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div><!-- /home -->
+
+
+<!-- ══════════════════════════════════════════
+     ② RECONSTRUCTION
+══════════════════════════════════════════ -->
+<div class="view" id="view-reconstruction">
+  <div class="pg-hero">
+    <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1400&q=80" alt=""/>
+    <div class="pg-hero-inner">
+      <div class="pg-kicker">Aesthetic Reconstruction</div>
+      <h1 class="pg-title">Surgery that <em>restores</em><br/>who you are</h1>
+      <p class="pg-intro">We specialise in reconstruction for those whose bodies have been changed by accident, illness, or transformation. Our surgeons treat every patient as a complete person — not a procedure.</p>
+    </div>
+  </div>
+
+  <div class="cat-bar">
+    <button class="cat-btn active" id="cat-all"      onclick="filterCat('all')">All Procedures</button>
+    <button class="cat-btn"        id="cat-accident"  onclick="filterCat('accident')">Post-Accident</button>
+    <button class="cat-btn"        id="cat-weight"    onclick="filterCat('weight')">Weight Loss</button>
+    <button class="cat-btn"        id="cat-bariatric" onclick="filterCat('bariatric')">Bariatric</button>
+    <button class="cat-btn"        id="cat-aesthetic" onclick="filterCat('aesthetic')">Hair & Face</button>
+    <button class="cat-btn"        id="cat-illness"   onclick="filterCat('illness')">Illness & Life Change</button>
+  </div>
+
+  <div class="proc-grid" id="procGrid">
+    <div class="pcard" data-cat="accident">
+      <div class="pcard-img"><img src="s1.jpg" alt=""/><div class="pcard-cat">Post-Accident · Face</div></div>
+      <div class="pcard-body">
+        <div class="pcard-name">Scar Revision</div>
+        <div class="pcard-price">from €1,400</div>
+        <p class="pcard-desc">Advanced revision of burn, trauma, and surgical scars. Laser resurfacing, surgical techniques, and skin regeneration protocols.</p>
+        <button class="pcard-btn" onclick="show('consult')">Enquire</button>
+      </div>
+    </div>
+    <div class="pcard" data-cat="accident">
+      <div class="pcard-img"><img src="n1.jpg" alt=""/><div class="pcard-cat">Post-Accident · Face</div></div>
+      <div class="pcard-body">
+        <div class="pcard-name">Rhinoplasty</div>
+        <div class="pcard-price">from €2,200</div>
+        <p class="pcard-desc">Post-trauma nose repair — functional and aesthetic. Breathing and confidence restored together by Tunisia's leading maxillofacial surgeons.</p>
+        <button class="pcard-btn" onclick="show('consult')">Enquire</button>
+      </div>
+    </div>
+    <div class="pcard" data-cat="accident">
+      <div class="pcard-img"><img src="pat1.jpg" alt=""/><div class="pcard-cat">Post-Accident · Face</div></div>
+      <div class="pcard-body">
+        <div class="pcard-name">Facial Reconstruction</div>
+        <div class="pcard-price">from €3,200</div>
+        <p class="pcard-desc">Comprehensive facial restoration following trauma. Bone structure, soft tissue, and skin rebuilt to the finest detail by specialist surgeons.</p>
+        <button class="pcard-btn" onclick="show('consult')">Enquire</button>
+      </div>
+    </div>
+    <div class="pcard" data-cat="weight">
+      <div class="pcard-img"><img src="nahielkerch.jpg" alt=""/><div class="pcard-cat">Weight Loss · Abdomen</div></div>
+      <div class="pcard-body">
+        <div class="pcard-name">Tummy Tuck</div>
+        <div class="pcard-price">from €3,400</div>
+        <p class="pcard-desc">Remove excess abdominal skin and tighten muscles after dramatic weight loss. Sculpt the body you worked so hard for.</p>
+        <button class="pcard-btn" onclick="show('consult')">Enquire</button>
+      </div>
+    </div>
+    <div class="pcard" data-cat="weight">
+      <div class="pcard-img"><img src="bl1.jpg" alt=""/><div class="pcard-cat">Weight Loss · Full Body</div></div>
+      <div class="pcard-body">
+        <div class="pcard-name">Body Lift</div>
+        <div class="pcard-price">from €4,200</div>
+        <p class="pcard-desc">Full circumferential lift — abdomen, hips, outer thighs, and buttocks — for massive weight loss patients. The most comprehensive transformation.</p>
+        <button class="pcard-btn" onclick="show('consult')">Enquire</button>
+      </div>
+    </div>
+    <div class="pcard" data-cat="weight">
+      <div class="pcard-img"><img src="bl2.jpg" alt=""/><div class="pcard-cat">Weight Loss · Arms</div></div>
+      <div class="pcard-body">
+        <div class="pcard-name">Arm Lift</div>
+        <div class="pcard-price">from €2,100</div>
+        <p class="pcard-desc">Remove excess skin from the upper arms following weight loss. Firm, contoured arms that reflect your achievement.</p>
+        <button class="pcard-btn" onclick="show('consult')">Enquire</button>
+      </div>
+    </div>
+    <div class="pcard" data-cat="illness">
+      <div class="pcard-img"><img src="br1.jpg" alt=""/><div class="pcard-cat">Illness · Breast</div></div>
+      <div class="pcard-body">
+        <div class="pcard-name">Breast Reconstruction</div>
+        <div class="pcard-price">from €2,800</div>
+        <p class="pcard-desc">Post-mastectomy reconstruction using implant or autologous tissue. Restoring form, sensation, and confidence after breast cancer — with the care you deserve.</p>
+        <button class="pcard-btn" onclick="show('consult')">Enquire</button>
+      </div>
+    </div>
+    <div class="pcard" data-cat="illness">
+      <div class="pcard-img"><img src="sk1.jpg" alt=""/><div class="pcard-cat">Illness · Skin & Tissue</div></div>
+      <div class="pcard-body">
+        <div class="pcard-name">Skin Graft & Tissue Repair</div>
+        <div class="pcard-price">from €2,400</div>
+        <p class="pcard-desc">For areas affected by burns, necrotising conditions, or surgical removal. Tissue reconstruction that integrates naturally into your body.</p>
+        <button class="pcard-btn" onclick="show('consult')">Enquire</button>
+      </div>
+    </div>
+    <div class="pcard" data-cat="illness">
+      <div class="pcard-img"><img src="Blepharoplasty.jpg" alt=""/><div class="pcard-cat">Illness · Eyes</div></div>
+      <div class="pcard-body">
+        <div class="pcard-name">Eyelid & Ptosis Repair</div>
+        <div class="pcard-price">from €1,400</div>
+        <p class="pcard-desc">Restore function and appearance of eyelids affected by nerve damage or illness. Microsurgical precision for natural results.</p>
+        <button class="pcard-btn" onclick="show('consult')">Enquire</button>
+      </div>
+    </div>
+    <div class="pcard" data-cat="bariatric">
+      <div class="pcard-img"><img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80" alt=""/><div class="pcard-cat">Bariatric · Stomach</div></div>
+      <div class="pcard-body">
+        <div class="pcard-name">Sleeve Gastrectomy</div>
+        <div class="pcard-price">from €3,200</div>
+        <p class="pcard-desc">Tunisia's most requested bariatric procedure. Remove 70–80% of stomach volume for lasting weight loss. All-inclusive stay from arrival to post-op retreat.</p>
+        <button class="pcard-btn" onclick="show('consult')">Enquire</button>
+      </div>
+    </div>
+    
+    <div class="pcard" data-cat="aesthetic">
+      <div class="pcard-img"><img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80" alt=""/><div class="pcard-cat">Hair · Transplant</div></div>
+      <div class="pcard-body">
+        <div class="pcard-name">FUE Hair Transplant</div>
+        <div class="pcard-price">from €1,600</div>
+        <p class="pcard-desc">Tunisia's most sought-after procedure for international patients. Natural hairline design, follicular unit extraction, and a recovery retreat in Hammamet. Results that look, feel, and grow naturally.</p>
+        <button class="pcard-btn" onclick="show('consult')">Enquire</button>
+      </div>
+    </div>
+    <div class="pcard" data-cat="aesthetic">
+      <div class="pcard-img"><img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&q=80" alt=""/><div class="pcard-cat">Face · Rejuvenation</div></div>
+      <div class="pcard-body">
+        <div class="pcard-name">Facelift & Rejuvenation</div>
+        <div class="pcard-price">from €2,800</div>
+        <p class="pcard-desc">SMAS facelift, brow lift, and full facial rejuvenation. European-trained surgeons, 50% below French prices. Paired with a post-surgical facial treatment programme at your retreat.</p>
+        <button class="pcard-btn" onclick="show('consult')">Enquire</button>
+      </div>
+    </div>
+    <div class="pcard" data-cat="aesthetic">
+      <div class="pcard-img"><img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=600&q=80" alt=""/><div class="pcard-cat">Body · Contouring</div></div>
+      <div class="pcard-body">
+        <div class="pcard-name">Liposuction & Body Sculpting</div>
+        <div class="pcard-price">from €1,900</div>
+        <p class="pcard-desc">High-definition liposuction, Brazilian butt lift, and body sculpting. For those who want to refine what diet and exercise cannot reach. Combined with drainage and nutrition retreat.</p>
+        <button class="pcard-btn" onclick="show('consult')">Enquire</button>
+      </div>
+    </div>
+
+      </div>
+    </div>
+  </div><!-- close proc-grid -->
+
+  <div class="med-note">
+    <div class="container" style="padding:40px 52px">
+      <p><strong>Medical notice:</strong> All procedures are tailored following a full consultation. Prices are indicative and include clinic fees, anaesthetist, and recovery accommodation. Hayet will never recommend a procedure that isn't medically and emotionally right for you. Your safety comes first — always.</p>
+    </div>
+  </div>
+
+</div><!-- /reconstruction -->
+
+
+<!-- ══════════════════════════════════════════
+     ③ RETREAT
+══════════════════════════════════════════ -->
+<div class="view" id="view-retreat">
+  <div class="retreat-hero">
+    <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1600&q=80" alt=""/>
+    <div class="retreat-hero-content">
+      <div class="lbl">Regenerative Wellness</div>
+      <h1 class="h1">Healing is not<br/><em>passive</em></h1>
+      <p class="retreat-hero-intro">After surgery, your environment shapes your recovery. We've curated Tunisia's three most restorative environments — each a living space designed for renewal of body and spirit.</p>
+    </div>
+  </div>
+
+  <!-- Location 1 -->
+  <div class="loc-block">
+    <div class="loc-img"><img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=900&q=80" alt="Hammamet"/></div>
+    <div class="loc-content">
+      <div class="loc-tag">Hammamet · Coastal Sanctuary</div>
+      <h2 class="loc-name">The Mediterranean<br/><em>has always healed</em></h2>
+      <p class="loc-body">Our Hammamet partners offer thalassotherapy, open-air meditation, and the kind of silence only found where sea meets sky. Post-surgical guests arrive by private transfer and begin their retreat from the moment they step through the door.</p>
+      <div class="loc-features">
+        <div class="loc-feat">Thalassotherapy & seawater pools</div>
+        <div class="loc-feat">Mediterranean anti-inflammatory cuisine</div>
+        <div class="loc-feat">Lymphatic drainage massage</div>
+        <div class="loc-feat">Gentle beach yoga at sunrise</div>
+      </div>
+      <button class="btn-ghost" onclick="show('consult')">Reserve this retreat</button>
+    </div>
+  </div>
+
+  <!-- Location 2 -->
+  <div class="loc-block">
+    <div class="loc-img"><img src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=900&q=80" alt="Ain Draham"/></div>
+    <div class="loc-content">
+      <div class="loc-tag">Ain Draham · Forest Immersion</div>
+      <h2 class="loc-name">Ancient forests.<br/><em>Elemental quiet.</em></h2>
+      <p class="loc-body">Tunisia's northern cork forests hold a stillness that slows the nervous system and accelerates healing. Ain Draham's altitude and clean mountain air offer something rare: a return to the elemental. Guests who come here often describe it as the week that changed everything.</p>
+      <div class="loc-features">
+        <div class="loc-feat">Shinrin-yoku (forest bathing) walks</div>
+        <div class="loc-feat">Cold spring hydrotherapy</div>
+        <div class="loc-feat">Breathwork & somatic therapy sessions</div>
+        <div class="loc-feat">Farm organic healing meals</div>
+      </div>
+      <button class="btn-ghost" onclick="show('consult')">Reserve this retreat</button>
+    </div>
+  </div>
+
+  <!-- Location 3 -->
+  <div class="loc-block">
+    <div class="loc-img"><img src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=900&q=80" alt="Tozeur"/></div>
+    <div class="loc-content">
+      <div class="loc-tag">Tozeur · Desert Silence</div>
+      <h2 class="loc-name">Light and silence<br/><em>unlike anywhere.</em></h2>
+      <p class="loc-body">The Sahara has a particular quality of light and quiet that cannot be found elsewhere. Our Tozeur retreat is minimal, intentional, and deeply restorative. Warm mineral pools, open skies, slow days. Guests arrive anxious and leave profoundly changed.</p>
+      <div class="loc-features">
+        <div class="loc-feat">Hammam & mineral pool therapies</div>
+        <div class="loc-feat">Sunset desert meditation walks</div>
+        <div class="loc-feat">Nutritional reset programme</div>
+        <div class="loc-feat">1:1 integration sessions</div>
+      </div>
+      <button class="btn-ghost" onclick="show('consult')">Reserve this retreat</button>
+    </div>
+  </div>
+
+  <!-- Wellness menu -->
+  <div class="wellness sec">
+    <div class="container">
+      <div class="lbl rev" style="color:rgba(140,180,130,.65)"><span style="display:block;width:28px;height:1px;background:rgba(140,180,130,.4)"></span>All retreats include</div>
+      <h2 class="h2 rev" style="color:#fff">A complete <em>wellness menu</em></h2>
+      <div class="well-grid">
+        <div class="well-item rev"><span class="well-icon">🌊</span><div class="well-title">Hydrotherapy</div><div class="well-sub">Thalasso & mineral</div></div>
+        <div class="well-item rev d1"><span class="well-icon">🧘</span><div class="well-title">Yoga & Breathwork</div><div class="well-sub">Daily practice</div></div>
+        <div class="well-item rev d2"><span class="well-icon">🍃</span><div class="well-title">Nutrition Plan</div><div class="well-sub">Anti-inflammatory</div></div>
+        <div class="well-item rev"><span class="well-icon">🌿</span><div class="well-title">Herbal Therapies</div><div class="well-sub">Tunisian botanicals</div></div>
+        <div class="well-item rev d1"><span class="well-icon">🤲</span><div class="well-title">Manual Therapy</div><div class="well-sub">Lymphatic & deep tissue</div></div>
+        <div class="well-item rev d2"><span class="well-icon">💬</span><div class="well-title">Integration Circles</div><div class="well-sub">Group & individual</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Packages -->
+  <section class="sec" style="background:var(--cream)">
+    <div class="container">
+      <div class="lbl rev">Retreat packages</div>
+      <h2 class="h2 rev">Choose your <em>depth of rest</em></h2>
+      <div class="pkg-grid">
+        <div class="pkg rev">
+          <div class="pkg-name">Recovery Rest</div>
+          <div class="pkg-price">€890</div>
+          <div class="pkg-dur">4 nights · Post-surgical</div>
+          <div class="pkg-line"></div>
+          <ul class="pkg-list">
+            <li>Private room & full board</li>
+            <li>Daily therapy session</li>
+            <li>Nutritionist meal plan</li>
+            <li>Airport transfers</li>
+            <li>Surgeon check-in call</li>
+          </ul>
+          <button class="pkg-cta" onclick="show('consult')">Select Package</button>
+        </div>
+        <div class="pkg featured rev d1">
+          <div class="pkg-badge">Most chosen</div>
+          <div class="pkg-name">Deep Renewal</div>
+          <div class="pkg-price">€1,650</div>
+          <div class="pkg-dur">7 nights · Full immersion</div>
+          <div class="pkg-line"></div>
+          <ul class="pkg-list">
+            <li>Private sea-view or forest suite</li>
+            <li>Daily therapy + 2 specialist sessions</li>
+            <li>Personalised nutrition reset</li>
+            <li>Breathwork or somatic sessions</li>
+            <li>Transfers & local guide</li>
+            <li>Integration session on departure</li>
+          </ul>
+          <button class="pkg-cta" onclick="show('consult')">Select Package</button>
+        </div>
+        <div class="pkg rev d2">
+          <div class="pkg-name">Complete Journey</div>
+          <div class="pkg-price">€2,800</div>
+          <div class="pkg-dur">14 nights · Surgery + Retreat</div>
+          <div class="pkg-line"></div>
+          <ul class="pkg-list">
+            <li>5 nights clinical recovery</li>
+            <li>9 nights retreat immersion</li>
+            <li>All therapies from Deep Renewal</li>
+            <li>1:1 integration coaching</li>
+            <li>Full nutrition programme</li>
+            <li>6-week post-return support</li>
+          </ul>
+          <button class="pkg-cta" onclick="show('consult')">Select Package</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div><!-- /retreat -->
+
+
+<!-- ══════════════════════════════════════════
+     ④ JOURNEY (How It Works)
+══════════════════════════════════════════ -->
+<div class="view" id="view-journey">
+  <div class="pg-hero">
+    <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=1400&q=80" alt=""/>
+    <div class="pg-hero-inner">
+      <div class="pg-kicker">The Hayet Method</div>
+      <h1 class="pg-title">One <em>continuous</em><br/>arc of care</h1>
+      <p class="pg-intro">From your first message to your last retreat day, every step of your Hayet journey is held by a dedicated care team. Nothing is left to chance. Nothing is left to you to figure out alone.</p>
+    </div>
+  </div>
+
+  <section class="sec" style="background:var(--cream)">
+    <div class="tl-wrap">
+      <div class="tl-item rev">
+        <div class="tl-num">01</div>
+        <div>
+          <div class="tl-tag">Before you arrive</div>
+          <h2 class="tl-title">Private Consultation</h2>
+          <p class="tl-body">A confidential video call with your care coordinator. We listen first. Then your surgeon joins for a medical discussion. Honest about what's possible, and whether Hayet is the right fit for your story.</p>
+          <div class="tl-chips"><span class="chip">Free of charge</span><span class="chip">Your language</span><span class="chip">Surgeon & coordinator</span><span class="chip">No commitment</span></div>
+          <div class="tl-dur">45–60 minutes</div>
+        </div>
+      </div>
+      <div class="tl-item rev">
+        <div class="tl-num">02</div>
+        <div>
+          <div class="tl-tag">Before you arrive</div>
+          <h2 class="tl-title">Your Personal Care Plan</h2>
+          <p class="tl-body">Your surgeon and wellness coordinator design a care plan together — the surgical approach, pre-op nutrition protocol, arrival day, recovery timeline, and retreat placement. You receive this in writing, in plain language.</p>
+          <div class="tl-chips"><span class="chip">Surgical plan</span><span class="chip">Nutrition protocol</span><span class="chip">Full written timeline</span></div>
+        </div>
+      </div>
+      <div class="tl-item rev">
+        <div class="tl-num">03</div>
+        <div>
+          <div class="tl-tag">Arrival day</div>
+          <h2 class="tl-title">Welcome to Tunisia</h2>
+          <p class="tl-body">Private airport pickup. Your coordinator is there in person. 5★ hotel, a pre-op welcome meal, and a day entirely yours. Your clinic appointment is the next morning.</p>
+          <div class="tl-chips"><span class="chip">Private transfer</span><span class="chip">Hotel check-in</span><span class="chip">Welcome meal</span><span class="chip">Coordinator on-call</span></div>
+          <div class="tl-dur">Day 1</div>
+        </div>
+      </div>
+      <div class="tl-item rev">
+        <div class="tl-num">04</div>
+        <div>
+          <div class="tl-tag">Clinical phase</div>
+          <h2 class="tl-title">Surgery & Recovery</h2>
+          <p class="tl-body">JCI-accredited clinic. 24/7 nursing. Daily surgeon visits. Your coordinator checks in every day. You are never without someone who knows your name and your story.</p>
+          <div class="tl-chips"><span class="chip">JCI clinic</span><span class="chip">24/7 nursing</span><span class="chip">Daily surgeon visits</span><span class="chip">All medications</span></div>
+          <div class="tl-dur">Days 2–6 (varies by procedure)</div>
+        </div>
+      </div>
+      <div class="tl-item rev">
+        <div class="tl-num">05</div>
+        <div>
+          <div class="tl-tag">Transition</div>
+          <h2 class="tl-title">Retreat Transfer</h2>
+          <p class="tl-body">Once your surgeon confirms you're ready, you transition to your retreat. Private transport to Hammamet, Ain Draham, or Tozeur. Your retreat team has been fully briefed.</p>
+          <div class="tl-chips"><span class="chip">Surgeon clearance</span><span class="chip">Private transfer</span><span class="chip">Briefed wellness team</span></div>
+        </div>
+      </div>
+      <div class="tl-item rev">
+        <div class="tl-num">06</div>
+        <div>
+          <div class="tl-tag">The retreat</div>
+          <h2 class="tl-title">Regenerative Immersion</h2>
+          <p class="tl-body">4 to 9 nights of deep rest. Hydrotherapy, daily therapy, farm-to-table meals, gentle movement, and space to simply be. Many guests describe this as the most significant week of their lives.</p>
+          <div class="tl-chips"><span class="chip">Daily therapy</span><span class="chip">Healing cuisine</span><span class="chip">Gentle movement</span><span class="chip">Integration circles</span></div>
+          <div class="tl-dur">4–9 nights</div>
+        </div>
+      </div>
+      <div class="tl-item rev">
+        <div class="tl-num">07</div>
+        <div>
+          <div class="tl-tag">Going home</div>
+          <h2 class="tl-title">Departure & Ongoing Care</h2>
+          <p class="tl-body">Airport transfer. Written aftercare plan. A 6-week check-in call with your coordinator. An open line to your surgeon. You leave Hayet feeling different — because you are.</p>
+          <div class="tl-chips"><span class="chip">Airport transfer</span><span class="chip">Aftercare plan</span><span class="chip">6-week follow-up</span><span class="chip">Open surgeon line</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INCLUDED -->
+  <div class="wellness sec">
+    <div class="container">
+      <div class="lbl rev" style="color:rgba(140,180,130,.65)"><span style="display:block;width:28px;height:1px;background:rgba(155, 199, 144, 0.4)"></span>What's included</div>
+      <h2 class="h2 rev" style="color:#fff">No surprises. <em>No hidden costs.</em></h2>
+      <div class="incl-grid">
+        <div class="incl rev"><div class="incl-icon"></div><div class="incl-title">Airport Transfers</div><p class="incl-body">Private pickup and drop-off. No taxis, no guessing.</p></div>
+        <div class="incl rev d1"><div class="incl-icon"></div><div class="incl-title">Accommodation</div><p class="incl-body">4★/5★ hotel for clinical recovery, plus retreat lodging.</p></div>
+        <div class="incl rev d2"><div class="incl-icon"></div><div class="incl-title">All Clinic Fees</div><p class="incl-body">Surgeon, anaesthetist, theatre, nursing — all included.</p></div>
+        <div class="incl rev"><div class="incl-icon"></div><div class="incl-title">Medications</div><p class="incl-body">All prescribed post-operative medications and dressings.</p></div>
+        <div class="incl rev d1"><div class="incl-icon"></div><div class="incl-title">Retreat Programme</div><p class="incl-body">All therapies, wellness sessions, and meals at the retreat.</p></div>
+        <div class="incl rev d2"><div class="incl-icon"></div><div class="incl-title">Follow-up Care</div><p class="incl-body">Coordinator before, during, and 6 weeks after return.</p></div>
+        <div class="incl rev"><div class="incl-icon"></div><div class="incl-title">Translation</div><p class="incl-body">All appointments in your language. EN, FR, AR, DE.</p></div>
+        <div class="incl rev d1"><div class="incl-icon"></div><div class="incl-title">Aftercare Plan</div><p class="incl-body">Written recovery plan to take home. No guesswork.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <section class="sec" style="background:var(--cream)">
+    <div class="container" style="max-width:800px">
+      <div class="lbl rev">Common questions</div>
+      <h2 class="h2 rev" style="margin-bottom:44px">Things people often <em>ask us</em></h2>
+      <div class="faq-item rev"><button class="faq-q" onclick="toggleFaq(this)">Is Tunisia safe for medical travel? <span class="faq-arrow">+</span></button><div class="faq-a"><div class="faq-a-inner">Yes. Our partner clinics are JCI-accredited, ISO 9001 certified, and held to European hygiene standards. Our surgeons trained in France, Belgium, and the UK. Tunisia has been a medical tourism destination for over 25 years.</div></div></div>
+      <div class="faq-item rev"><button class="faq-q" onclick="toggleFaq(this)">Can I come for the retreat without surgery? <span class="faq-arrow">+</span></button><div class="faq-a"><div class="faq-a-inner">Yes. Our retreats are open to anyone seeking deep rest and restoration — whether or not they've had surgery with us. If you've had a procedure elsewhere and want a proper recovery environment, or simply need to restore yourself, Hayet's retreats are available to you.</div></div></div>
+      <div class="faq-item rev"><button class="faq-q" onclick="toggleFaq(this)">How long does a typical journey take? <span class="faq-arrow">+</span></button><div class="faq-a"><div class="faq-a-inner">Our Complete Journey runs 14 nights: approximately 5 clinical nights and 9 retreat nights. Shorter stays are available — 7 nights for Deep Renewal, or shorter clinical-only packages for specific procedures.</div></div></div>
+      <div class="faq-item rev"><button class="faq-q" onclick="toggleFaq(this)">What languages do you work in? <span class="faq-arrow">+</span></button><div class="faq-a"><div class="faq-a-inner">English, French, Arabic, and German. All consultations, medical appointments, and retreat programmes can be conducted in your language. We will never ask you to navigate something important without full comprehension.</div></div></div>
+      <div class="faq-item rev"><button class="faq-q" onclick="toggleFaq(this)">How much does it cost? <span class="faq-arrow">+</span></button><div class="faq-a"><div class="faq-a-inner">Procedures start from €1,400 for scar revision. All-inclusive surgical packages from €2,200. Retreat packages from €890 for 4 nights. The Complete Journey — surgery plus retreat — from €3,800 all-inclusive. Every quote is final. No hidden fees.</div></div></div>
+    </div>
+  </section>
+
+  <div class="cta-block">
+    <div class="lbl">Begin today</div>
+    <h2 class="h2">Ready to start <em>your journey?</em></h2>
+    <p class="cta-body">A free, private consultation. No commitment required — just an honest conversation.</p>
+    <button class="btn btn-white" onclick="show('consult')">Book Free Consultation</button>
+  </div>
+</div><!-- /journey -->
+
+
+<!-- ══════════════════════════════════════════
+     ⑤ ABOUT
+══════════════════════════════════════════ -->
+<div class="view" id="view-about">
+  <div class="about-hero">
+    <div class="ah-left">
+      <div class="lbl rev">About Hayet</div>
+      <h1 class="h1 rev">Built for<br/><em>hard stories</em></h1>
+      <p class="body-text rev" style="max-width:480px;margin-top:20px">Hayet exists because aesthetic medicine has long focused on enhancement for its own sake. We believe the most profound work is restoration — giving back something that was taken. Tunisia's first holistic reconstruction and regenerative wellness centre.</p>
+    </div>
+    <div class="ah-right">
+      <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=900&q=80" alt=""/>
+    </div>
+  </div>
+
+  <section class="sec" style="background:var(--ink)">
+    <div class="container">
+      <div class="manifesto-wrap">
+        <p class="manifesto-quote rev">"The body keeps the score. We believe it also holds the blueprint for <em>who you were</em> — and who you can become."</p>
+        <div class="rev d1">
+          <p class="manifesto-body">Hayet was founded on a simple conviction: that aesthetic surgery, when done in service of restoration rather than vanity, is one of the most dignified things medicine can offer. It says: what happened to you matters. Your body matters. You deserve to feel like yourself again.</p>
+          <p class="manifesto-body" style="margin-top:18px">We pair that conviction with the best surgical talent in North Africa and the Mediterranean, and a regenerative retreat programme inspired by the world's most progressive wellness centres.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Surgeons -->
+  <section class="sec" style="background:var(--cream)">
+    <div class="container">
+      <div class="lbl rev">Our surgeons</div>
+      <h2 class="h2 rev">Trained at <em>the highest level</em></h2>
+      <div class="doc-grid">
+        <div class="doc-card rev">
+          <div class="doc-photo"><img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&q=80" alt="Dr. Hayathem Helali"/></div>
+          <div class="doc-info">
+            <div class="doc-name">Dr. Hayathem Helali</div>
+            <div class="doc-spec">Maxillo-facial & Reconstructive Surgery</div>
+            <p class="doc-bio">Trained in Paris and Tunis. 15+ years, 2,000+ reconstructive procedures. Specialises in post-trauma facial reconstruction, rhinoplasty, and complex scar revision.</p>
+            <div class="doc-creds"><span class="doc-cred">Clinique Pasteur</span><span class="doc-cred">Paris-trained</span><span class="doc-cred">15+ yrs</span></div>
+          </div>
+        </div>
+        <div class="doc-card rev d1">
+          <div class="doc-photo"><img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=400&q=80" alt="Dr. Haifa Fodha"/></div>
+          <div class="doc-info">
+            <div class="doc-name">Dr. Haifa Fodha</div>
+            <div class="doc-spec">Plastic & Reconstructive Surgery</div>
+            <p class="doc-bio">Graduated Faculté de Médecine de Monastir, advanced training in Belgium. Leads breast reconstruction and post-weight-loss body contouring programmes.</p>
+            <div class="doc-creds"><span class="doc-cred">Clinique Le Bardo</span><span class="doc-cred">Belgium-trained</span><span class="doc-cred">12+ yrs</span></div>
+          </div>
+        </div>
+        <div class="doc-card rev">
+          <div class="doc-photo"><img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&q=80" alt="Dr. Aymen Jalloul"/></div>
+          <div class="doc-info">
+            <div class="doc-name">Dr. Aymen Jalloul</div>
+            <div class="doc-spec">Hair Restoration & Microsurgery</div>
+            <p class="doc-bio">Tunisia's most sought-after FUE and DHI specialist. Also performs eyebrow and beard reconstruction following scarring or alopecia caused by accident or illness.</p>
+            <div class="doc-creds"><span class="doc-cred">Clinique Pasteur</span><span class="doc-cred">FUE / DHI specialist</span><span class="doc-cred">10+ yrs</span></div>
+          </div>
+        </div>
+        <div class="doc-card rev d1">
+          <div class="doc-photo"><img src="https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=400&q=80" alt="Dr. Sonia Triki"/></div>
+          <div class="doc-info">
+            <div class="doc-name">Dr. Sonia Triki</div>
+            <div class="doc-spec">Regenerative Medicine & Anti-Ageing</div>
+            <p class="doc-bio">Bridges the clinical and holistic at Hayet. Oversees regenerative protocols — PRP, mesotherapy, skin regeneration — and liaises with our retreat wellness teams.</p>
+            <div class="doc-creds"><span class="doc-cred">Tunis & Hammamet</span><span class="doc-cred">Regenerative specialist</span><span class="doc-cred">14+ yrs</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <div class="stats-bar">
+    <div class="stats-grid">
+      <div class="stat"><span class="stat-n">4</span><span class="stat-l">Specialist Surgeons</span></div>
+      <div class="stat"><span class="stat-n">2M+</span><span class="stat-l">Patients/Yr in Tunisia</span></div>
+      <div class="stat"><span class="stat-n">50%</span><span class="stat-l">Savings vs. Europe</span></div>
+      <div class="stat"><span class="stat-n">#1</span><span class="stat-l">Africa Medical Tourism</span></div>
+      <div class="stat"><span class="stat-n">EN·FR·AR·DE</span><span class="stat-l">Languages</span></div>
+    </div>
+  </div>
+
+  <!-- Clinics -->
+  <section class="sec" style="background:var(--cream)">
+    <div class="container">
+      <div class="lbl rev">Our clinics</div>
+      <h2 class="h2 rev">European standards. <em>Tunisian warmth.</em></h2>
+      <div class="clinic-grid">
+        <div class="clinic rev">
+          <div class="clinic-name">Clinique Pasteur</div>
+          <div class="clinic-loc">Tunis · El Menzah</div>
+          <p class="clinic-body">One of Tunisia's most respected private surgical clinics. Full ISO 9001 certification, 25+ years of international patient care, held to European hygiene standards throughout.</p>
+          <div class="clinic-certs"><span class="clinic-cert">ISO 9001</span><span class="clinic-cert">HAS Accredited</span><span class="clinic-cert">International Unit</span></div>
+        </div>
+        <div class="clinic rev d1">
+          <div class="clinic-name">Clinique Le Bardo</div>
+          <div class="clinic-loc">Tunis · Le Bardo</div>
+          <p class="clinic-body">JCI-accredited facility specialising in plastic, reconstructive, and maxillofacial procedures. Preferred for complex reconstructive cases requiring multi-disciplinary surgical teams.</p>
+          <div class="clinic-certs"><span class="clinic-cert">JCI Accredited</span><span class="clinic-cert">ISO 9001</span><span class="clinic-cert">Multi-disciplinary</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-block">
+    <div class="lbl">Begin today</div>
+    <h2 class="h2">A private consultation.<br/><em>No obligation. No rush.</em></h2>
+    <p class="cta-body">Talk to a care coordinator who will listen, not sell. Honestly.</p>
+    <button class="btn btn-white" onclick="show('consult')">Begin Your Journey →</button>
+  </div>
+</div><!-- /about -->
+
+
+<!-- ══════════════════════════════════════════
+     ⑥ CONSULTATION
+══════════════════════════════════════════ -->
+<div class="view" id="view-consult">
+  <div class="consult-wrap">
+    <!-- FORM -->
+    <div class="consult-form-side">
+      <div class="form-kicker">Private & No-Obligation</div>
+      <h1 class="form-title">Begin your<br/>consultation</h1>
+      <p class="form-sub">Tell us a little about your story. A care coordinator responds within 24 hours to arrange a private video call — no pressure, no jargon.</p>
+
+      <div id="formBody">
+        <div class="frow">
+          <div class="fg"><label>First Name</label><input id="fname" type="text" placeholder="Nadia"/></div>
+          <div class="fg"><label>Last Name</label><input id="lname" type="text" placeholder="L."/></div>
+        </div>
+        <div class="fg"><label>Email</label><input id="email" type="email" placeholder="nadia@email.com"/></div>
+        <div class="fg"><label>Phone / WhatsApp</label><input id="phone" type="tel" placeholder="+33 6 00 00 00 00"/></div>
+        <div class="fg"><label>Country</label>
+          <select id="country">
+            <option value="">Select your country…</option>
+            <option>France</option><option>United Kingdom</option><option>Germany</option>
+            <option>Belgium</option><option>Switzerland</option><option>Italy</option>
+            <option>Spain</option><option>Canada</option><option>Netherlands</option>
+            <option>Tunisia</option><option>Other</option>
+          </select>
+        </div>
+        <div class="fg"><label>What brings you to Hayet?</label>
+          <select id="reason">
+            <option value="">Please select…</option>
+            <optgroup label="Post-Accident Reconstruction">
+              <option>Scar Revision</option><option>Rhinoplasty (post-accident)</option>
+              <option>Facial Reconstruction</option><option>Burn Reconstruction</option>
+            </optgroup>
+            <optgroup label="Weight Loss Body Surgery">
+              <option>Tummy Tuck</option><option>Body Lift</option>
+              <option>Arm Lift</option><option>Multiple areas</option>
+            </optgroup>
+            <optgroup label="Illness & Life Change">
+              <option>Breast Reconstruction (post-mastectomy)</option>
+              <option>Skin Graft or Tissue Repair</option><option>Eyelid / Ptosis Repair</option>
+            </optgroup>
+            <optgroup label="Retreat Only">
+              <option>Recovery Rest (4 nights)</option>
+              <option>Deep Renewal (7 nights)</option>
+              <option>Complete Journey (14 nights)</option>
+            </optgroup>
+            <option>Not sure — I'd like to talk</option>
+          </select>
+        </div>
+        <div class="fg"><label>Your story <span style="font-weight:300;text-transform:none;letter-spacing:0">(optional)</span></label>
+          <textarea id="story" placeholder="Share as much or as little as you like. What has changed, and what would you like to feel?"></textarea>
+        </div>
+        <div class="f-err" id="fErr"></div>
+        <button class="fsub" id="fBtn" onclick="submitForm()">Send Consultation Request →</button>
+        <p class="f-note">We'll never share your information. This is a private, confidential space.</p>
+      </div>
+
+      <div class="f-success" id="fSuccess">
+        <h3>Thank you, <span id="successName">friend</span>.</h3>
+        <p>Your consultation request has been received. A Hayet care coordinator will reach out within 24 hours to arrange your private video call.<br/><br/><em>— The Hayet Team</em></p>
+      </div>
+    </div>
+
+    <!-- INFO SIDE -->
+    <div class="consult-info-side">
+      <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=900&q=80" alt=""/>
+      <div class="consult-info-inner">
+        <h2 class="info-title">You deserve<br/>to feel <em>whole</em></h2>
+        <p class="info-body">Hayet was built for people who have been through something — and who are ready to take back their body, their confidence, and their sense of self. Every consultation is a conversation, not a pitch.</p>
+        <div>
+          <div class="promise"><span class="promise-icon">🔒</span><div><h4>Completely Confidential</h4><p>Your story is yours. Everything shared with Hayet remains private.</p></div></div>
+          <div class="promise"><span class="promise-icon">⏱</span><div><h4>Response within 24 hours</h4><p>We don't keep people waiting. A real human will reach out quickly.</p></div></div>
+          <div class="promise"><span class="promise-icon">🎗</span><div><h4>No pressure, ever</h4><p>If Hayet isn't right for you, we'll say so — and point you toward someone who is.</p></div></div>
+          <div class="promise"><span class="promise-icon">🌍</span><div><h4>We speak your language</h4><p>English, French, Arabic, German — our team is international.</p></div></div>
+        </div>
+        <div class="info-contact">
+          <p>Prefer to reach us directly?</p>
+          <a href="https://wa.me/21654025402" target="_blank">💬 WhatsApp: +216 54 02 54 02</a>
+          <a href="/cdn-cgi/l/email-protection#88e0ede4e4e7c8faede6e7fee9ebe9faeda6ebe7e5">✉️ <span class="__cf_email__" data-cfemail="cea6aba2a2a18ebcaba0a1b8afadafbcabe0ada1a3">[email&#160;protected]</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /consult -->
+
+
+<!-- ══════════════════════════════════════════
+     ⑦ STAY & RESTORE — Medical Tourism Hub
+══════════════════════════════════════════ -->
+<div class="view" id="view-stay">
+
+  <!-- HERO -->
+  <div class="stay-hero">
+    <img src="C:\Users\ursar\Downloads\hayet\regenerate.jpg" alt="Tunisia Mediterranean"/>
+    <div class="stay-hero-content">
+      <div class="lbl">Medical Tourism · Tunisia</div>
+      <h1 class="h1">Surgery heals the body.<br/><em>Where you rest</em> heals the soul.</h1>
+      <p class="stay-hero-intro">Hayet takes care of your clinic and your surgeons. We also take care of everything around it — the maison d'hôtes by the sea, the yoga teacher who specialises in post-surgical recovery, the flight from your city. One journey, fully held.</p>
+      <div class="stay-tabs">
+        <button class="stay-tab active" onclick="switchStay('hotels')">🏡 &nbsp;Hotels & Stays</button>
+        <button class="stay-tab" onclick="switchStay('specialists')">🧘 &nbsp;Wellness Specialists</button>
+        <button class="stay-tab" onclick="switchStay('travel')">✈️ &nbsp;Flights & Transfers</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- REAL STATS BAR -->
+  <div class="stay-stats">
+    <div class="stats-grid" style="max-width:1200px;margin:0 auto;padding:0 52px;display:grid;grid-template-columns:repeat(5,1fr);text-align:center">
+      <div class="stat"><span class="stat-n">2M+</span><span class="stat-l">Foreign Patients / Year</span></div>
+      <div class="stat"><span class="stat-n">50%</span><span class="stat-l">Savings vs. Europe</span></div>
+      <div class="stat"><span class="stat-n">#1</span><span class="stat-l">Africa Medical Tourism</span></div>
+      <div class="stat"><span class="stat-n">500k+</span><span class="stat-l">Hospitalised Annually</span></div>
+      <div class="stat"><span class="stat-n">€1B+</span><span class="stat-l">Sector Revenue / Year</span></div>
+    </div>
+    <p style="text-align:center;font-size:.64rem;color:rgba(255,255,255,.2);margin-top:18px;letter-spacing:.1em">Sources: Banque Centrale de Tunisie · Ministère de la Santé · La Presse de Tunisie 2023–2024</p>
+  </div>
+
+  <!-- ── SECTION 1: HOTELS ── -->
+  <div class="stay-section active" id="stay-hotels">
+
+    <div class="hotel-intro-wrap">
+      <div class="container">
+        <div class="hotel-intro-inner">
+          <div>
+            <div class="lbl rev">Curated stays</div>
+            <h2 class="h2 rev">Places chosen<br/>for <em>how they heal</em></h2>
+            <p class="body-text rev" style="margin-top:16px;max-width:440px">Every property here was vetted by the Hayet wellness team for silence, sea or nature access, post-surgical kitchens, and staff who understand recovering patients. Not just hotels — sanctuaries.</p>
+          </div>
+          <div class="hotel-intro-aside rev">
+            <p style="font-weight:500;color:var(--ink);margin-bottom:10px;font-size:.85rem">What "Hayet Partner" means</p>
+            <p>These properties understand medical tourism. They handle compression garments gently, serve warm anti-inflammatory meals, keep music low, and have massage therapists trained in lymphatic drainage on call. Your care coordinator books it all — you just arrive.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="region-bar">
+      <span class="region-label">Region</span>
+      <button class="region-btn active" id="rbtn-all" onclick="filterRegion('all')">All</button>
+      <button class="region-btn" id="rbtn-hammamet" onclick="filterRegion('hammamet')">Hammamet · Coast</button>
+      <button class="region-btn" id="rbtn-marsa" onclick="filterRegion('marsa')">La Marsa · Tunis</button>
+      <button class="region-btn" id="rbtn-nabeul" onclick="filterRegion('nabeul')">Nabeul · Cap Bon</button>
+      <button class="region-btn" id="rbtn-tabarka" onclick="filterRegion('tabarka')">Tabarka · North</button>
+      <button class="region-btn" id="rbtn-tozeur" onclick="filterRegion('tozeur')">Tozeur · Desert</button>
+    </div>
+
+    <div class="hotel-grid" id="hotelGrid">
+
+      <div class="hcard rev" data-region="hammamet">
+        <div class="hcard-img">
+          <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=80" alt="Hammamet Riad"/>
+          <div class="hcard-badge">Maison d'Hôtes · Hayet Partner</div>
+        </div>
+        <div class="hcard-body">
+          <div class="hcard-loc">📍 Hammamet · Medina Quarter</div>
+          <div class="hcard-name">Dar Hayet</div>
+          <p class="hcard-desc">A whitewashed riad 200m from the sea, inside Hammamet's old medina. Eight intimate rooms around a jasmine courtyard. The chef cooks anti-inflammatory Mediterranean — everything from the garden. Post-surgical guests often describe the silence here as their first real rest in years.</p>
+          <div class="hcard-feats">
+            <span class="hcard-feat">Post-surgical menu</span><span class="hcard-feat">Sea access</span>
+            <span class="hcard-feat">Jasmine courtyard</span><span class="hcard-feat">Lymphatic massage</span>
+          </div>
+          <div class="hcard-price">From <strong>€90/night</strong> · Breakfast included</div>
+          <div class="hcard-actions">
+            <a href="https://www.booking.com/searchresults.html?ss=Hammamet+medina+riad+Tunisia" target="_blank" class="hcard-book">Booking.com →</a>
+            <button class="hcard-add" onclick="show('consult')">Add to my journey</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="hcard rev d1" data-region="hammamet">
+        <div class="hcard-img">
+          <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&q=80" alt="Hammamet Beach"/>
+          <div class="hcard-badge">Boutique Hotel · Hayet Partner</div>
+        </div>
+        <div class="hcard-body">
+          <div class="hcard-loc">📍 Hammamet Nord · Beachfront</div>
+          <div class="hcard-name">La Villa Bleue Hammamet</div>
+          <p class="hcard-desc">Twelve suites facing uninterrupted Mediterranean. Private beach, thalassotherapy pool, and a kitchen sourcing directly from Cap Bon farms. Post-surgical guests get priority quiet-wing allocation, sea-view rooms, and daily check-in from our care team.</p>
+          <div class="hcard-feats">
+            <span class="hcard-feat">Thalasso pool</span><span class="hcard-feat">Private beach</span>
+            <span class="hcard-feat">Farm kitchen</span><span class="hcard-feat">Quiet wing</span>
+          </div>
+          <div class="hcard-price">From <strong>€130/night</strong> · Half-board available</div>
+          <div class="hcard-actions">
+            <a href="https://www.booking.com/searchresults.html?ss=Hammamet+boutique+hotel+beachfront+Tunisia" target="_blank" class="hcard-book">Booking.com →</a>
+            <button class="hcard-add" onclick="show('consult')">Add to my journey</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="hcard rev d2" data-region="marsa">
+        <div class="hcard-img">
+          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80" alt="La Marsa"/>
+          <div class="hcard-badge">Maison d'Hôtes · Hayet Partner</div>
+        </div>
+        <div class="hcard-body">
+          <div class="hcard-loc">📍 La Marsa · Tunis Banlieue Nord</div>
+          <div class="hcard-name">Dar Sidi Bou</div>
+          <p class="hcard-desc">A restored colonial house in La Marsa's quiet lanes, minutes from Sidi Bou Saïd. Ten rooms shaded by bougainvillea, a pool, and a terrace with a sea-horizon view. Close to Tunis Carthage airport — ideal for the first or last nights of your journey.</p>
+          <div class="hcard-feats">
+            <span class="hcard-feat">Airport proximity</span><span class="hcard-feat">Pool</span>
+            <span class="hcard-feat">Sea view terrace</span><span class="hcard-feat">Quiet lanes</span>
+          </div>
+          <div class="hcard-price">From <strong>€85/night</strong> · Breakfast included</div>
+          <div class="hcard-actions">
+            <a href="https://www.booking.com/searchresults.html?ss=La+Marsa+Tunis+maison+d%27hotes" target="_blank" class="hcard-book">Booking.com →</a>
+            <button class="hcard-add" onclick="show('consult')">Add to my journey</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="hcard rev" data-region="nabeul">
+        <div class="hcard-img">
+          <img src="https://images.unsplash.com/photo-1559494007-9f5847c49d94?w=800&q=80" alt="Cap Bon"/>
+          <div class="hcard-badge">Eco-Lodge · Hayet Partner</div>
+        </div>
+        <div class="hcard-body">
+          <div class="hcard-loc">📍 Nabeul · Cap Bon Peninsula</div>
+          <div class="hcard-name">Ferme Jasmine Cap Bon</div>
+          <p class="hcard-desc">An organic farm-stay on the Cap Bon peninsula — citrus groves, jasmine fields, and a private beach cove. The kitchen is entirely farm-to-table and tuned to post-operative anti-inflammatory nutrition. One of Tunisia's most beautiful hidden properties.</p>
+          <div class="hcard-feats">
+            <span class="hcard-feat">Organic farm kitchen</span><span class="hcard-feat">Private cove</span>
+            <span class="hcard-feat">Citrus gardens</span><span class="hcard-feat">Holistic menu</span>
+          </div>
+          <div class="hcard-price">From <strong>€110/night</strong> · Full board available</div>
+          <div class="hcard-actions">
+            <a href="https://www.booking.com/searchresults.html?ss=Nabeul+Cap+Bon+eco+farm+Tunisia" target="_blank" class="hcard-book">Booking.com →</a>
+            <button class="hcard-add" onclick="show('consult')">Add to my journey</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="hcard rev d1" data-region="tabarka">
+        <div class="hcard-img">
+          <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&q=80" alt="Tabarka forest"/>
+          <div class="hcard-badge">Forest Lodge · Hayet Partner</div>
+        </div>
+        <div class="hcard-body">
+          <div class="hcard-loc">📍 Tabarka · Cork Forests, North Tunisia</div>
+          <div class="hcard-name">Lodge Ain Draham</div>
+          <p class="hcard-desc">Set inside Tunisia's ancient cork-oak forests at 800m altitude, where the air is clean, cool, and the silence is profound. Guests recovering from bariatric or weight-loss procedures particularly thrive here — walks in nature, hydrotherapy springs, and breathwork in the forest.</p>
+          <div class="hcard-feats">
+            <span class="hcard-feat">Forest bathing</span><span class="hcard-feat">Mountain springs</span>
+            <span class="hcard-feat">Somatic therapy</span><span class="hcard-feat">Clean alpine air</span>
+          </div>
+          <div class="hcard-price">From <strong>€75/night</strong> · Full board included</div>
+          <div class="hcard-actions">
+            <a href="https://www.booking.com/searchresults.html?ss=Ain+Draham+Tabarka+forest+lodge+Tunisia" target="_blank" class="hcard-book">Booking.com →</a>
+            <button class="hcard-add" onclick="show('consult')">Add to my journey</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="hcard rev d2" data-region="tozeur">
+        <div class="hcard-img">
+          <img src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=800&q=80" alt="Tozeur desert"/>
+          <div class="hcard-badge">Desert Retreat · Hayet Partner</div>
+        </div>
+        <div class="hcard-body">
+          <div class="hcard-loc">📍 Tozeur · Sahara Gateway</div>
+          <div class="hcard-name">Dar Cherait Desert Lodge</div>
+          <p class="hcard-desc">Mineral hot pools, open skies, and a quality of light found nowhere else on earth. Guests arrive anxious and leave profoundly changed. Tozeur is particularly powerful for those processing a major life change — illness recovery, post-bariatric, or pure reset.</p>
+          <div class="hcard-feats">
+            <span class="hcard-feat">Mineral hot pools</span><span class="hcard-feat">Sunset meditation</span>
+            <span class="hcard-feat">Nutritional reset</span><span class="hcard-feat">Integration sessions</span>
+          </div>
+          <div class="hcard-price">From <strong>€95/night</strong> · Half-board included</div>
+          <div class="hcard-actions">
+            <a href="https://www.booking.com/searchresults.html?ss=Tozeur+desert+retreat+lodge+Tunisia" target="_blank" class="hcard-book">Booking.com →</a>
+            <button class="hcard-add" onclick="show('consult')">Add to my journey</button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /hotel-grid -->
+  </div><!-- /stay-hotels -->
+
+
+  <!-- ── SECTION 2: WELLNESS SPECIALISTS ── -->
+  <div class="stay-section" id="stay-specialists">
+    <div class="spec-section">
+      <div class="container">
+        <div class="lbl rev" style="color:rgba(140,180,130,.65)"><span style="display:block;width:28px;height:1px;background:rgba(140,180,130,.4)"></span>Post-surgical wellness</div>
+        <h2 class="h2 rev" style="color:#fff;margin-bottom:8px">The people who <em>meet you</em><br/>at your retreat</h2>
+        <p class="rev" style="font-size:.9rem;font-weight:300;color:rgba(255,255,255,.4);max-width:560px;line-height:1.9;margin-bottom:0">Our specialist network is made up of practitioners who specifically work with post-surgical patients — they understand compression garments, lymphatic healing, and the emotional complexity of body change. They are not generic spa staff.</p>
+        <div class="spec-grid" style="margin-top:52px">
+
+          <div class="scard rev">
+            <div class="scard-emoji">🧘</div>
+            <div class="scard-disc">Yoga Therapy</div>
+            <div class="scard-name">Rania Mansouri</div>
+            <div class="scard-loc">📍 Hammamet · Available Nabeul & Marsa</div>
+            <p class="scard-bio">Certified yoga therapist specialising in post-surgical and post-bariatric recovery. Trained in Yin Yoga, restorative yoga, and trauma-sensitive practice. Rania works exclusively with patients in recovery — she knows when to push and when to simply hold space.</p>
+            <div class="scard-methods">
+              <span class="scard-method">Yin Yoga</span><span class="scard-method">Restorative</span>
+              <span class="scard-method">Breathwork</span><span class="scard-method">Post-bariatric</span>
+            </div>
+            <button class="scard-btn" onclick="show('consult')">Request this specialist →</button>
+          </div>
+
+          <div class="scard rev d1">
+            <div class="scard-emoji">🌿</div>
+            <div class="scard-disc">Nutritional Therapy</div>
+            <div class="scard-name">Dr. Leila Chaabane</div>
+            <div class="scard-loc">📍 Tunis · Visits all retreat locations</div>
+            <p class="scard-bio">Clinical nutritionist with 12 years' experience in post-operative and bariatric nutrition. Designs personalised anti-inflammatory meal programmes for your recovery phase, coordinates with your surgeon, and does 1:1 video follow-ups once you're home.</p>
+            <div class="scard-methods">
+              <span class="scard-method">Post-bariatric</span><span class="scard-method">Anti-inflammatory</span>
+              <span class="scard-method">Gut health</span><span class="scard-method">Video follow-up</span>
+            </div>
+            <button class="scard-btn" onclick="show('consult')">Request this specialist →</button>
+          </div>
+
+          <div class="scard rev d2">
+            <div class="scard-emoji">🤲</div>
+            <div class="scard-disc">Manual & Lymphatic Therapy</div>
+            <div class="scard-name">Karim Belhaj</div>
+            <div class="scard-loc">📍 Hammamet & Nabeul</div>
+            <p class="scard-bio">Certified lymphatic drainage therapist with specific training in post-liposuction, post-mastectomy, and post-body-lift care. Karim's sessions reduce swelling, improve circulation, and accelerate tissue healing. He is quiet, precise, and deeply skilled.</p>
+            <div class="scard-methods">
+              <span class="scard-method">Lymphatic drainage</span><span class="scard-method">Post-lipo</span>
+              <span class="scard-method">Post-mastectomy</span><span class="scard-method">Scar massage</span>
+            </div>
+            <button class="scard-btn" onclick="show('consult')">Request this specialist →</button>
+          </div>
+
+          <div class="scard rev">
+            <div class="scard-emoji">💬</div>
+            <div class="scard-disc">Somatic & Integrative Therapy</div>
+            <div class="scard-name">Sana Dridi</div>
+            <div class="scard-loc">📍 Tunis · Online & Tozeur</div>
+            <p class="scard-bio">Somatic therapist and certified integrative counsellor. Works with patients experiencing body image shifts after weight loss surgery, reconstructive procedures, or illness. Sana offers 1:1 sessions in Arabic, French, and English — at the retreat or by video.</p>
+            <div class="scard-methods">
+              <span class="scard-method">Body image</span><span class="scard-method">Post-bariatric</span>
+              <span class="scard-method">Trauma-informed</span><span class="scard-method">Arabic / FR / EN</span>
+            </div>
+            <button class="scard-btn" onclick="show('consult')">Request this specialist →</button>
+          </div>
+
+          <div class="scard rev d1">
+            <div class="scard-emoji">🌊</div>
+            <div class="scard-disc">Thalassotherapy & Hydrotherapy</div>
+            <div class="scard-name">Institut Thalassa Hammamet</div>
+            <div class="scard-loc">📍 Hammamet · Accredited Centre</div>
+            <p class="scard-bio">Tunisia's longest-established thalassotherapy centre. Seawater immersion, jet showers, marine mud wraps, and hydro-jet massage designed around post-surgical protocols. Hayet patients receive a dedicated programme from the institute's medical director.</p>
+            <div class="scard-methods">
+              <span class="scard-method">Thalasso</span><span class="scard-method">Marine mud</span>
+              <span class="scard-method">Hydro-jet</span><span class="scard-method">Seawater pools</span>
+            </div>
+            <button class="scard-btn" onclick="show('consult')">Reserve sessions →</button>
+          </div>
+
+          <div class="scard rev d2">
+            <div class="scard-emoji">🔥</div>
+            <div class="scard-disc">Traditional Hammam & Wellbeing</div>
+            <div class="scard-name">Maître Hammam Sidi Bou Saïd</div>
+            <div class="scard-loc">📍 Sidi Bou Saïd · Tunis</div>
+            <p class="scard-bio">A traditional Tunisian hammam with practitioners trained in post-surgical body work. Gentle exfoliation, Savon Beldi cleansing, and argan oil massage — modified for sensitive skin and recovering tissue. A ritual of gentleness that many patients describe as transformative.</p>
+            <div class="scard-methods">
+              <span class="scard-method">Traditional hammam</span><span class="scard-method">Argan massage</span>
+              <span class="scard-method">Scar-gentle</span><span class="scard-method">Post-surgical</span>
+            </div>
+            <button class="scard-btn" onclick="show('consult')">Reserve sessions →</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div><!-- /stay-specialists -->
+
+
+  <!-- ── SECTION 3: FLIGHTS & TRANSFERS ── -->
+  <div class="stay-section" id="stay-travel">
+    <div class="travel-section">
+      <div class="container">
+        <div class="lbl rev">Getting here</div>
+        <h2 class="h2 rev">Your journey starts<br/><em>before you land</em></h2>
+        <p class="body-text rev" style="margin-top:12px;max-width:560px">Tunisia is 2–3 hours from most of Western Europe. Your care coordinator handles airport transfers, hotel check-in, and the clinic appointment — you arrive, and everything is already done.</p>
+        <div class="travel-grid">
+
+          <div class="tcol">
+            <h3>Book your <em>flight</em></h3>
+            <p>Tunis-Carthage Airport (TUN) is served by most major European carriers. We recommend booking at least 3 weeks in advance, and always flying business or premium economy for post-surgical return journeys.</p>
+            <div class="flight-links">
+              <a href="https://www.tunisair.com" target="_blank" class="flink">
+                <span class="flink-icon">🇹🇳</span>
+                <div><div class="flink-name">Tunisair</div><div class="flink-routes">Paris · Lyon · Marseille · Brussels · Geneva · Rome · London</div></div>
+                <span class="flink-arr">Book →</span>
+              </a>
+              <a href="https://www.transavia.com" target="_blank" class="flink">
+                <span class="flink-icon">✈️</span>
+                <div><div class="flink-name">Transavia</div><div class="flink-routes">Paris Orly · Nantes · Lyon · Bordeaux</div></div>
+                <span class="flink-arr">Book →</span>
+              </a>
+              <a href="https://www.nouvelair.com" target="_blank" class="flink">
+                <span class="flink-icon">🌙</span>
+                <div><div class="flink-name">Nouvelair</div><div class="flink-routes">Paris · Nice · Strasbourg · Amsterdam · Brussels</div></div>
+                <span class="flink-arr">Book →</span>
+              </a>
+              <a href="https://www.ryanair.com" target="_blank" class="flink">
+                <span class="flink-icon">🟡</span>
+                <div><div class="flink-name">Ryanair</div><div class="flink-routes">London Stansted · Brussels · Milan · Madrid</div></div>
+                <span class="flink-arr">Book →</span>
+              </a>
+              <a href="https://www.easyjet.com" target="_blank" class="flink">
+                <span class="flink-icon">🟠</span>
+                <div><div class="flink-name">easyJet</div><div class="flink-routes">London Gatwick · Paris CDG · Basel · Amsterdam</div></div>
+                <span class="flink-arr">Book →</span>
+              </a>
+              <a href="https://www.google.com/flights?hl=en#flt=/m/07s9rl0.TUN.*" target="_blank" class="flink" style="border-color:var(--sage)">
+                <span class="flink-icon">🔍</span>
+                <div><div class="flink-name">Search all flights to Tunis</div><div class="flink-routes">Compare all airlines on Google Flights</div></div>
+                <span class="flink-arr">Search →</span>
+              </a>
+            </div>
+            <div class="visa-box">
+              <h4>Visa & Entry — Quick Guide</h4>
+              <ul>
+                <li>🇫🇷 France, 🇧🇪 Belgium, 🇨🇭 Switzerland, 🇮🇹 Italy — <strong>No visa required</strong></li>
+                <li>🇬🇧 United Kingdom — <strong>No visa required</strong> (up to 3 months)</li>
+                <li>🇩🇪 Germany, 🇳🇱 Netherlands, 🇪🇸 Spain — <strong>No visa required</strong></li>
+                <li>🇨🇦 Canada, 🇺🇸 USA — <strong>No visa required</strong> (up to 4 months)</li>
+                <li>Other nationalities — contact us and we'll confirm your entry requirements</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tcol">
+            <h3>Airport transfers<br/>&amp; <em>local logistics</em></h3>
+            <p>From the moment you land, Hayet handles everything. Your care coordinator or driver meets you at arrivals with your name on a card. No taxis, no confusion, no stress — especially important when you are travelling post-surgery.</p>
+            <div class="transfer-list">
+              <div class="titem">
+                <span class="titem-icon">🚗</span>
+                <div>
+                  <div class="titem-title">Private Airport Transfer · Arrival & Departure</div>
+                  <p class="titem-desc">Air-conditioned private vehicle. Driver meets you at arrivals, takes you directly to your hotel or clinic. Available 24/7, 365 days.</p>
+                  <div class="titem-price">Tunis-Carthage Airport → Tunis Centre / La Marsa from €18 · to Hammamet from €55</div>
+                </div>
+              </div>
+              <div class="titem">
+                <span class="titem-icon">🏥</span>
+                <div>
+                  <div class="titem-title">Clinic ↔ Hotel Daily Transfers</div>
+                  <p class="titem-desc">We arrange all clinic-to-hotel transfers during your clinical phase. Your care coordinator travels with you on Day 1.</p>
+                  <div class="titem-price">Included in all Hayet packages</div>
+                </div>
+              </div>
+              <div class="titem">
+                <span class="titem-icon">🌊</span>
+                <div>
+                  <div class="titem-title">Clinic → Retreat Transfer</div>
+                  <p class="titem-desc">When your clinical phase ends, we transfer you to your retreat location — Hammamet, Nabeul, Ain Draham, or Tozeur. Comfortable, reclining vehicle. Never rushed.</p>
+                  <div class="titem-price">Tunis → Hammamet from €38 · to Tozeur from €120</div>
+                </div>
+              </div>
+              <div class="titem">
+                <span class="titem-icon">🛒</span>
+                <div>
+                  <div class="titem-title">Pharmacy & Essentials Run</div>
+                  <p class="titem-desc">Your care coordinator handles post-surgical pharmacy pickups and any essential shopping so you never need to leave your room before you're ready.</p>
+                  <div class="titem-price">Included in all Hayet packages</div>
+                </div>
+              </div>
+              <div class="titem">
+                <span class="titem-icon">📞</span>
+                <div>
+                  <div class="titem-title">24/7 WhatsApp Coordinator</div>
+                  <p class="titem-desc">Your personal care coordinator is reachable on WhatsApp at any hour throughout your stay. For questions, concerns, or anything you need arranged.</p>
+                  <div class="titem-price">Included in all Hayet packages · <a href="https://wa.me/21654025402" target="_blank" style="color:var(--sage)">Message us now</a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div><!-- /stay-travel -->
+
+  <div class="cta-block">
+    <div class="lbl">Build your journey</div>
+    <h2 class="h2">Tell us what you need.<br/><em>We'll handle the rest.</em></h2>
+    <p class="cta-body">Surgery, retreat, hotel, specialist, flights — our care coordinator builds your complete personalised journey in one conversation.</p>
+    <button class="btn btn-white" onclick="show('consult')">Start My Journey →</button>
+  </div>
+
+</div><!-- /stay -->
+
+
+<!-- ══════ JAVASCRIPT ══════ -->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+/* ── STAY & RESTORE TABS ── */
+function switchStay(tab){
+  document.querySelectorAll('.stay-section').forEach(s=>s.classList.remove('active'));
+  document.getElementById('stay-'+tab).classList.add('active');
+  document.querySelectorAll('.stay-tab').forEach(b=>b.classList.remove('active'));
+  const tabMap={hotels:0,specialists:1,travel:2};
+  document.querySelectorAll('.stay-tab')[tabMap[tab]].classList.add('active');
+  window.scrollTo({top:document.querySelector('.stay-hero').offsetHeight+70,behavior:'smooth'});
+}
+
+/* ── HOTEL REGION FILTER ── */
+function filterRegion(region){
+  document.querySelectorAll('.region-btn').forEach(b=>b.classList.remove('active'));
+  const btn=document.getElementById('rbtn-'+region);
+  if(btn)btn.classList.add('active');
+  document.querySelectorAll('.hcard').forEach(card=>{
+    card.style.display=(region==='all'||card.dataset.region===region)?'flex':'none';
+  });
+}
+
+/* ── VIEW SWITCHING ── */
+function show(id){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById('view-'+id).classList.add('active');
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  const nb = document.getElementById('nb-'+id);
+  if(nb) nb.classList.add('active');
+  window.scrollTo({top:0,behavior:'instant'});
+  // Trigger reveal animations on new view
+  setTimeout(()=>initReveal(),50);
+}
+
+/* ── MOBILE NAV ── */
+function toggleMobile(){
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+/* ── PROCEDURE FILTER ── */
+function filterCat(cat){
+  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
+  const btn = document.getElementById('cat-'+cat);
+  if(btn) btn.classList.add('active');
+  document.querySelectorAll('.pcard').forEach(card=>{
+    card.style.display = (cat==='all' || card.dataset.cat===cat) ? 'block' : 'none';
+  });
+}
+
+/* ── FAQ ── */
+function toggleFaq(btn){
+  btn.parentElement.classList.toggle('open');
+}
+
+/* ── CONSULTATION FORM ── */
+async function submitForm(){
+  const err = document.getElementById('fErr');
+  err.classList.remove('show');
+  const fname = document.getElementById('fname').value.trim();
+  const lname = document.getElementById('lname').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const reason = document.getElementById('reason').value;
+  if(!fname||!lname||!email||!phone||!reason){
+    err.textContent='Please fill in all required fields before sending.';
+    err.classList.add('show'); return;
+  }
+  const btn = document.getElementById('fBtn');
+  btn.textContent='Sending…'; btn.disabled=true;
+  await new Promise(r=>setTimeout(r,1200));
+  document.getElementById('formBody').style.display='none';
+  document.getElementById('successName').textContent=fname;
+  document.getElementById('fSuccess').classList.add('show');
+}
+
+/* ── HERO SLIDESHOW ── */
+(function(){
+  var current = 0;
+  var total = 4;
+  var DURATION = 6000; // ms per slide
+  var timer = null;
+  var barTimer = null;
+
+  function slideTo(n){
+    var slides = document.querySelectorAll('.hslide');
+    var dots   = document.querySelectorAll('.sdot');
+    var segs   = document.querySelectorAll('.hslide-strip-seg');
+    var nums   = ['01','02','03','04'];
+
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    segs[current].classList.remove('active');
+
+    current = ((n % total) + total) % total;
+
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+    segs[current].classList.add('active');
+
+    var numEl = document.getElementById('slideNum');
+    if(numEl) numEl.textContent = nums[current];
+
+    resetBar();
+  }
+
+  function slideMove(dir){ slideTo(current + dir); }
+
+  function resetBar(){
+    if(barTimer) clearTimeout(barTimer);
+    var bar = document.getElementById('slideBar');
+    if(!bar) return;
+    bar.style.transition = 'none';
+    bar.style.width = '0%';
+    void bar.offsetWidth; // reflow
+    bar.style.transition = 'width ' + DURATION + 'ms linear';
+    bar.style.width = '100%';
+    barTimer = setTimeout(function(){ slideTo(current + 1); }, DURATION);
+  }
+
+  window.slideTo = slideTo;
+  window.slideMove = slideMove;
+
+  // Start on load
+  window.addEventListener('DOMContentLoaded', function(){
+    resetBar();
+  });
+
+  // Also start immediately in case DOMContentLoaded already fired
+  if(document.readyState !== 'loading') resetBar();
+})();
+
+/* ── SCROLL REVEAL ── */
+function initReveal(){
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on')}});
+  },{threshold:0.12});
+  document.querySelectorAll('.rev').forEach(el=>obs.observe(el));
+}
+initReveal();
+</script>
+
+<!-- Hayet CHATBOT -->
+<button id="chatToggle" onclick="toggleChat()" aria-label="Chat with cha">
+  <span class="chat-icon-open">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.477 2 2 6.154 2 11.307c0 2.522 1.05 4.8 2.757 6.453L3.5 21.5l4.13-1.32A10.13 10.13 0 0012 20.615c5.523 0 10-4.154 10-9.308C22 6.154 17.523 2 12 2z" fill="currentColor"/></svg>
+  </span>
+  <span class="chat-icon-close">&#x2715;</span>
+  <span class="chat-badge hidden" id="chatBadge">1</span>
+</button>
+
+<div id="chatWidget" class="chat-widget">
+  <div class="chat-header">
+    <div class="chat-header-avatar">
+      <svg viewBox="0 0 36 36" fill="none">
+        <circle cx="18" cy="18" r="18" fill="#5C7052"/>
+        <circle cx="18" cy="15" r="7" fill="rgba(255,255,255,0.15)"/>
+        <circle cx="18" cy="37" r="13" fill="rgba(255,255,255,0.12)"/>
+        <circle cx="15" cy="14" r="1.5" fill="white" opacity="0.9"/>
+        <circle cx="21" cy="14" r="1.5" fill="white" opacity="0.9"/>
+        <path d="M15 18 Q18 20.5 21 18" stroke="white" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.9"/>
+      </svg>
+    </div>
+    <div class="chat-header-info">
+      <div class="chat-header-name">cha &middot; &#1604;&#1614;&#1610;&#1618;&#1604;&#1609;</div>
+      <div class="chat-header-status"><span class="status-dot"></span>Your Hayet guide &middot; Online</div>
+    </div>
+    <button class="chat-close-btn" onclick="toggleChat()">&#x2715;</button>
+  </div>
+  <div class="chat-messages" id="chatMessages"></div>
+  <div class="chat-quick-replies" id="quickReplies">
+    <button class="qr-btn" onclick="sendQuick(this)">What procedures do you offer?</button>
+    <button class="qr-btn" onclick="sendQuick(this)">How much does it cost?</button>
+    <button class="qr-btn" onclick="sendQuick(this)">Tell me about the retreats</button>
+    <button class="qr-btn" onclick="sendQuick(this)">Is Tunisia safe for surgery?</button>
+  </div>
+  <div class="chat-input-area">
+    <textarea id="chatInput" class="chat-input" placeholder="Ask cha anything..." rows="1" onkeydown="handleChatKey(event)" oninput="autoResize(this)"></textarea>
+    <button class="chat-send" id="chatSendBtn" onclick="sendMessage()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+  <div class="chat-footer-note">Powered by Claude &middot; Hayet AI</div>
+</div>
+
+<style>
+#chatToggle{
+  position:fixed;bottom:28px;right:28px;z-index:2000;
+  width:60px;height:60px;border-radius:50%;
+  background:linear-gradient(135deg, var(--terra), #7A2A10);color:#fff;border:none;cursor:pointer;
+  box-shadow:0 8px 32px rgba(139,58,26,.55), 0 0 20px rgba(201,146,42,.2);
+  display:flex;align-items:center;justify-content:center;
+  transition:background .25s,transform .2s;
+}
+#chatToggle:hover{background:linear-gradient(135deg, var(--terra-l), var(--terra));transform:scale(1.07)}
+#chatToggle .chat-icon-open{display:flex}
+#chatToggle .chat-icon-close{display:none;font-size:.9rem}
+#chatToggle.open .chat-icon-open{display:none}
+#chatToggle.open .chat-icon-close{display:flex}
+.chat-badge{
+  position:absolute;top:-3px;right:-3px;
+  background:var(--terra);color:#fff;
+  width:20px;height:20px;border-radius:50%;
+  font-size:.62rem;font-weight:600;
+  display:flex;align-items:center;justify-content:center;
+  border:2px solid var(--cream);
+  animation:badge-pulse 2s ease-in-out infinite;
+}
+.chat-badge.hidden{display:none}
+@keyframes badge-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
+.chat-widget{
+  position:fixed;bottom:100px;right:28px;z-index:1999;
+  width:380px;max-width:calc(100vw - 32px);
+  background:var(--white,#FDFAF5);
+  border:1px solid rgba(198,183,154,.35);
+  border-radius:2px;
+  box-shadow:0 24px 80px rgba(42,38,32,.18),0 4px 16px rgba(42,38,32,.08);
+  display:flex;flex-direction:column;
+  max-height:580px;
+  opacity:0;transform:translateY(16px) scale(.97);
+  pointer-events:none;
+  transition:opacity .3s,transform .3s;
+  overflow:hidden;
+}
+.chat-widget.open{opacity:1;transform:translateY(0) scale(1);pointer-events:all}
+.chat-header{
+  background:var(--sage);padding:16px 18px;
+  display:flex;align-items:center;gap:12px;flex-shrink:0;
+}
+.chat-header-avatar{
+  width:40px;height:40px;border-radius:50%;overflow:hidden;flex-shrink:0;
+  border:2px solid rgba(255,255,255,.25);
+}
+.chat-header-avatar svg{width:100%;height:100%}
+.chat-header-info{flex:1}
+.chat-header-name{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:400;color:#fff;letter-spacing:.02em;line-height:1.2}
+.chat-header-status{font-size:.65rem;font-weight:300;color:rgba(255,255,255,.7);display:flex;align-items:center;gap:6px;margin-top:2px}
+.status-dot{width:7px;height:7px;border-radius:50%;background:#a8e6a3;animation:pulse-dot 2s ease-in-out infinite}
+@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.5}}
+.chat-close-btn{background:none;border:none;color:rgba(255,255,255,.6);font-size:1rem;cursor:pointer;padding:4px;transition:color .2s;line-height:1}
+.chat-close-btn:hover{color:#fff}
+.chat-messages{flex:1;overflow-y:auto;padding:18px 16px;display:flex;flex-direction:column;gap:14px;scroll-behavior:smooth}
+.chat-messages::-webkit-scrollbar{width:4px}
+.chat-messages::-webkit-scrollbar-thumb{background:var(--sand,#E6DCCB);border-radius:2px}
+.msg{display:flex;gap:8px;align-items:flex-end;animation:msg-in .3s ease}
+@keyframes msg-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.msg.user{flex-direction:row-reverse}
+.msg-avatar{width:28px;height:28px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.6rem;color:#fff;font-weight:500}
+.msg-bubble{max-width:82%;padding:11px 15px;font-size:.84rem;font-weight:300;line-height:1.7;border-radius:2px}
+.msg.bot .msg-bubble{background:var(--cream,#F8F4EE);color:var(--ink,#2A2620);border:1px solid rgba(198,183,154,.3);border-bottom-left-radius:0}
+.msg.user .msg-bubble{background:var(--sage,#5C7052);color:#fff;border-bottom-right-radius:0}
+.msg-bubble em{color:var(--terra,#9C5036);font-style:italic}
+.msg-bubble strong{font-weight:500}
+.typing-bubble{display:flex;gap:5px;align-items:center;padding:4px 0}
+.typing-dot{width:7px;height:7px;border-radius:50%;background:var(--sand-d,#C8B99A);animation:typing-bounce 1.2s ease-in-out infinite}
+.typing-dot:nth-child(2){animation-delay:.2s}
+.typing-dot:nth-child(3){animation-delay:.4s}
+@keyframes typing-bounce{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-7px)}}
+.chat-quick-replies{display:flex;flex-wrap:wrap;gap:6px;padding:0 14px 12px;flex-shrink:0}
+.qr-btn{font-family:'Jost',sans-serif;font-size:.67rem;font-weight:400;letter-spacing:.04em;background:transparent;border:1px solid rgba(92,112,82,.3);color:var(--sage,#5C7052);padding:7px 12px;cursor:pointer;border-radius:1px;transition:all .2s;line-height:1.3}
+.qr-btn:hover{background:var(--sage,#5C7052);color:#fff;border-color:var(--sage,#5C7052)}
+.chat-input-area{display:flex;align-items:flex-end;gap:8px;padding:10px 14px 12px;border-top:1px solid rgba(198,183,154,.25);flex-shrink:0}
+.chat-input{flex:1;border:1px solid var(--sand,#E6DCCB);background:var(--cream,#F8F4EE);font-family:'Jost',sans-serif;font-size:.84rem;font-weight:300;color:var(--ink,#2A2620);padding:10px 13px;resize:none;outline:none;border-radius:1px;transition:border-color .2s;max-height:100px;overflow-y:auto;line-height:1.5}
+.chat-input:focus{border-color:var(--sage,#5C7052)}
+.chat-input::placeholder{color:var(--sand-d,#C8B99A)}
+.chat-send{width:38px;height:38px;background:var(--sage,#5C7052);color:#fff;border:none;cursor:pointer;border-radius:1px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s}
+.chat-send:hover{background:var(--sage-l,#7A9470)}
+.chat-send:disabled{background:var(--sand-d,#C8B99A);cursor:not-allowed}
+.chat-footer-note{text-align:center;padding:6px;font-size:.58rem;font-weight:300;color:var(--sand-d,#C8B99A);letter-spacing:.06em;border-top:1px solid rgba(198,183,154,.15);flex-shrink:0}
+/* ═══════════════════════════════════════════════
+   CANDLELIGHT ATMOSPHERE UPGRADES
+═══════════════════════════════════════════════ */
+
+/* Grain texture overlay on body */
+body::before{
+  content:'';position:fixed;inset:0;z-index:9999;
+  pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity:.25;mix-blend-mode:overlay;
+}
+
+/* Philosophy bar — deep ember/smoke */
+.philosophy{background:var(--smoke);padding:0}
+.phil-num{color:rgba(232,160,48,.12) !important}
+.phil-title{color:rgba(255,220,160,.75) !important}
+.phil-body{color:rgba(255,200,130,.35) !important}
+
+/* Stats bar — warm ember */
+.stats-bar{background:linear-gradient(135deg, var(--ember) 0%, var(--terra) 100%)}
+
+/* CTA block — deep amber warmth */
+.cta-block{background:linear-gradient(135deg, var(--terra) 0%, #7A2A10 100%)}
+
+/* Journey strip — ember dark */
+.journey-strip{background:var(--ink2);background:linear-gradient(180deg,#2E2010 0%,#1A1208 100%)}
+
+/* Serve cards — warm cream */
+.serve-card{background:var(--cream)}
+.serve-card:hover{background:var(--white)}
+.serve-card::before{background:linear-gradient(180deg, var(--amber), var(--gold))}
+.serve-num{color:var(--sand) !important}
+.serve-card:hover .serve-num{color:rgba(201,146,42,.25) !important}
+
+/* Footer */
+.site-footer{background:linear-gradient(180deg, #1A1208 0%, #0E0C05 100%)}
+.footer-logo em{color:var(--amber) !important}
+
+/* Mobile menu */
+.mobile-menu{background:var(--cream);border-bottom:1px solid var(--sand)}
+
+/* Proc cards */
+.pcard{box-shadow: 0 2px 20px rgba(139,58,26,.06)}
+.pcard:hover{box-shadow: 0 8px 40px rgba(139,58,26,.14);transform:translateY(-3px);transition:transform .3s,box-shadow .3s}
+
+/* Retreat hero overlay */
+.retreat-hero::before{background:linear-gradient(170deg,rgba(26,18,8,.88) 0%,rgba(26,18,8,.5) 50%,rgba(26,18,8,.1) 100%) !important}
+
+/* Package cards — ember tones */
+.pkg-card{border:1px solid rgba(200,164,106,.25)}
+
+/* About manifesto dark bg */
+section[style*="background:var(--ink)"]{background:var(--smoke) !important}
+
+/* Consult info side */
+.consult-info-side{background:linear-gradient(145deg, var(--ember), #3A1A08)}
+
+/* Chat widget — warm amber */
+.chat-header{background:linear-gradient(135deg, var(--terra), #7A2A10) !important}
+.msg.user .msg-bubble{background:linear-gradient(135deg, var(--terra), var(--terra-l)) !important}
+#chatToggle{background:linear-gradient(135deg, var(--terra), #7A2A10) !important}
+
+/* Warm glow on section transitions */
+.philosophy,.stats-bar,.cta-block,.journey-strip{
+  position:relative;
+}
+.philosophy::before,.cta-block::before{
+  content:'';position:absolute;left:50%;top:-1px;transform:translateX(-50%);
+  width:60%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(201,146,42,.4),transparent);
+  pointer-events:none;
+}
+
+/* Editorial banner — warmer overlay */
+.editorial::before{background:linear-gradient(95deg,rgba(26,18,8,.94) 0%,rgba(26,18,8,.55) 55%,rgba(26,18,8,.12) 100%) !important}
+
+/* Testimonial cards */
+.tcard{background:var(--cream)}
+.tcard:nth-child(2){background:#fff8ec}
+
+/* Doctor creds */
+.doc-cred{background:rgba(201,146,42,.12) !important;color:var(--terra) !important}
+
+/* Clinic certs */
+.clinic-cert{color:var(--amber) !important;border-color:rgba(201,146,42,.4) !important}
+
+/* Form focus — amber accent */
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--amber) !important;box-shadow:0 0 0 3px rgba(201,146,42,.08)}
+
+/* Quick reply buttons */
+.qr-btn{border-color:rgba(192,122,47,.3) !important;color:var(--sage) !important}
+.qr-btn:hover{background:var(--sage) !important;border-color:var(--sage) !important}
+
+/* Warm scrollbar */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--cream)}
+::-webkit-scrollbar-thumb{background:var(--sand-d);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:var(--amber)}
+
+/* ═══════════════════════════════════════════════
+   MOBILE HOME — COMPACT & NEAT
+═══════════════════════════════════════════════ */
+@media(max-width:768px){
+  /* Nav */
+  .nav-wrap{padding:0 20px}
+  .nav-center{display:none}
+  .burger{display:flex}
+
+  /* General spacing */
+  .container{padding:0 20px}
+  .sec{padding:52px 0}
+
+  /* Hero */
+  .hero-slides{min-height:520px;height:88vh;max-height:700px}
+  .hslide-title{font-size:clamp(2.2rem,9vw,3rem)!important}
+  .hslide-body{font-size:.88rem;margin-bottom:28px}
+  .hslide-content{padding:0 22px!important}
+  .hslide-actions .btn{padding:12px 24px;font-size:.65rem}
+
+  /* Philosophy bar — 1 col */
+  .phil-grid{grid-template-columns:1fr!important}
+  .phil-item{padding:28px 22px}
+
+  /* WHO WE SERVE — horizontal scroll card carousel */
+  .serve-grid{
+    display:flex!important;
+    flex-wrap:nowrap!important;
+    overflow-x:auto!important;
+    -webkit-overflow-scrolling:touch;
+    scroll-snap-type:x mandatory;
+    background:var(--sand);
+    margin-top:28px!important;
+    padding-bottom:2px;
+    gap:1px;
+  }
+  .serve-grid::-webkit-scrollbar{height:3px}
+  .serve-grid::-webkit-scrollbar-thumb{background:var(--sage);border-radius:2px}
+  .serve-scroll-hint-mobile{display:block!important;text-align:center;font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--sage);opacity:.6;margin-top:10px;padding-bottom:4px}
+  .serve-card{
+    min-width:80vw!important;
+    max-width:80vw!important;
+    flex-shrink:0;
+    scroll-snap-align:start;
+    padding:32px 24px!important;
+  }
+  .serve-num{font-size:2.6rem!important;margin-bottom:10px!important}
+  .serve-name{font-size:1.2rem!important}
+  .serve-body{font-size:.81rem!important}
+
+  /* Journey strip — 2-col grid */
+  .journey-strip{padding:44px 0}
+  .journey-steps{grid-template-columns:1fr 1fr!important;margin-top:28px!important}
+  .jstep{padding:22px 16px}
+  .jstep-title{font-size:.95rem}
+  .jstep-body{font-size:.74rem}
+
+  /* Editorial banner */
+  .editorial{height:400px}
+  .editorial-content{padding:0 22px;max-width:100%}
+  .editorial-content .h2{font-size:1.85rem!important}
+  .editorial-body{font-size:.84rem;margin-bottom:22px}
+
+  /* Testimonials — single col */
+  .test-grid{grid-template-columns:1fr!important}
+  .tcard{padding:32px 22px}
+  .tcard-quote{font-size:1.05rem}
+
+  /* Stats — 3-col wrap */
+  .stats-bar{padding:36px 0}
+  .stats-grid{grid-template-columns:repeat(3,1fr)!important;padding:0 14px}
+  .stat{padding:0 8px}
+  .stat-n{font-size:1.8rem}
+  .stat:nth-child(4),.stat:nth-child(5){margin-top:22px}
+
+  /* CTA block */
+  .cta-block{padding:52px 22px}
+  .cta-block .h2{font-size:clamp(1.7rem,7vw,2.2rem)}
+
+  /* Footer */
+  .footer-grid{grid-template-columns:1fr!important;gap:32px}
+  .footer-bot{flex-direction:column;gap:12px;text-align:center}
+  .footer-legal{flex-wrap:wrap;justify-content:center}
+
+  /* Section titles on mobile */
+  .h1{font-size:clamp(2.2rem,8vw,3.2rem)!important}
+  .h2{font-size:clamp(1.7rem,6vw,2.4rem)!important}
+}
+</style>
+
+<script>
+(function(){
+var SYSTEM = "You are cha, Hayet's warm and knowledgeable care guide. Hayet is Tunisia's first holistic medical tourism and regenerative wellness centre, based in Tunis.\n\nPersonality: Warm, reassuring, human. Never clinical or robotic. Never pushy. Authentically Tunisian. You speak English, French, and Arabic. Match the user's language. Empathetic toward people who come after accidents, illness, or weight loss.\n\nHayet services:\n1. RECONSTRUCTION SURGERY: Post-accident scar revision, rhinoplasty, facial reconstruction, burn reconstruction. Weight loss body surgery: tummy tuck from EUR 3400, body lift from EUR 4200, arm lift from EUR 2100. Illness recovery: breast reconstruction from EUR 2800, skin grafts from EUR 2400, eyelid repair from EUR 1400. Bariatric: sleeve gastrectomy from EUR 3200, gastric bypass from EUR 4100, gastric balloon from EUR 1800. Aesthetic: FUE hair transplant from EUR 1600, facelift from EUR 2800, liposuction from EUR 1900, rhinoplasty from EUR 2200. Dental: implants from EUR 650 per tooth, full smile from EUR 4200.\n2. RETREATS: Hammamet coastal sanctuary, Ain Draham forest immersion, Tozeur desert silence. Packages: Recovery Rest 4 nights EUR 890, Deep Renewal 7 nights EUR 1650, Complete Journey 14 nights EUR 2800.\n3. LOGISTICS: Private airport transfers. 24/7 WhatsApp care coordinator. WhatsApp: +216 54 02 54 02. Email: hello@Hayet.tn.\n4. SURGEONS: Dr. Hayathem Helali (maxillo-facial, Paris-trained), Dr. Haifa Fodha (plastic and reconstructive, Belgium-trained), Dr. Aymen Jalloul (hair restoration), Dr. Sonia Triki (regenerative medicine). Clinics: Clinique Pasteur (ISO 9001), Clinique Le Bardo (JCI accredited).\nTunisia: safe for medical tourism 25+ years, 50-60% cheaper than Europe, no visa needed for EU/UK/USA/Canada.\n\nStyle guidelines: concise answers, 2-4 short paragraphs. Lead with empathy for emotional topics. Invite free consultation or WhatsApp at end. End with a gentle question when natural.";
+
+var chatHistory = [];
+var chatOpen = false;
+var hasOpened = false;
+
+window.toggleChat = function(){
+  chatOpen = !chatOpen;
+  document.getElementById('chatToggle').classList.toggle('open', chatOpen);
+  document.getElementById('chatWidget').classList.toggle('open', chatOpen);
+  document.getElementById('chatBadge').classList.add('hidden');
+  if(chatOpen && !hasOpened){ hasOpened = true; initChat(); }
+  if(chatOpen){ setTimeout(function(){ var i=document.getElementById('chatInput'); if(i) i.focus(); }, 350); }
+};
+
+function initChat(){
+  var welcome = "Marhba bik \u2014 welcome. \uD83C\uDF3F\n\nI'm cha, your Hayet guide. Whether you're curious about a procedure, thinking about a retreat, or simply want to understand what your journey here could look like \u2014 I'm here to listen, not to sell.\n\nWhat brings you to Hayet today?";
+  appendMsg('bot', welcome);
+  chatHistory = [{role:'user',content:'Hello'},{role:'assistant',content:welcome}];
+}
+
+function appendMsg(role, text){
+  var msgs = document.getElementById('chatMessages');
+  var div = document.createElement('div');
+  div.className = 'msg ' + role;
+  var av = role==='bot'
+    ? '<div class="msg-avatar" style="background:#C07A2F;font-size:.6rem">&#x2736;</div>'
+    : '<div class="msg-avatar" style="background:#8B3A1A">You</div>';
+  var html = text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/\.([^.]+)\./g,'<strong>$1</strong>')
+    .replace(/\n/g,'<br>');
+  div.innerHTML = av + '<div class="msg-bubble">' + html + '</div>';
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function showTyping(){
+  var msgs = document.getElementById('chatMessages');
+  var div = document.createElement('div');
+  div.className='msg bot'; div.id='typingIndicator';
+  div.innerHTML='<div class="msg-avatar" style="background:#C07A2F;font-size:.6rem">&#x2736;</div><div class="msg-bubble"><div class="typing-bubble"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div>';
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+function hideTyping(){ var t=document.getElementById('typingIndicator'); if(t)t.remove(); }
+
+window.sendQuick = function(btn){
+  document.getElementById('quickReplies').style.display='none';
+  sendMessageText(btn.textContent.trim());
+};
+window.handleChatKey = function(e){ if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage();} };
+window.autoResize = function(el){ el.style.height='auto'; el.style.height=Math.min(el.scrollHeight,100)+'px'; };
+window.sendMessage = function(){
+  var input=document.getElementById('chatInput');
+  var text=input.value.trim(); if(!text)return;
+  input.value=''; input.style.height='auto';
+  sendMessageText(text);
+};
+
+function sendMessageText(text){
+  document.getElementById('quickReplies').style.display='none';
+  appendMsg('user',text);
+  chatHistory.push({role:'user',content:text});
+  var btn=document.getElementById('chatSendBtn'); btn.disabled=true;
+  showTyping();
+  fetch('https://api.anthropic.com/v1/messages',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+      model:'claude-sonnet-4-20250514',
+      max_tokens:1000,
+      system:SYSTEM,
+      messages:chatHistory
+    })
+  })
+  .then(function(r){return r.json();})
+  .then(function(data){
+    hideTyping();
+    var reply=(data.content&&data.content[0]&&data.content[0].text)
+      ?data.content[0].text
+      :"I had a small hiccup \u2014 please try again or reach us on WhatsApp: +216 54 02 54 02";
+    chatHistory.push({role:'assistant',content:reply});
+    appendMsg('bot',reply);
+    btn.disabled=false;
+    var ci=document.getElementById('chatInput'); if(ci)ci.focus();
+  })
+  .catch(function(){
+    hideTyping();
+    appendMsg('bot',"My connection dropped \u2014 apologies! You can reach us on WhatsApp at +216 54 02 54 02 or email hello@Hayet.tn and we'll get back to you right away.");
+    btn.disabled=false;
+  });
+}
+
+setTimeout(function(){
+  if(!hasOpened){ var b=document.getElementById('chatBadge'); if(b)b.classList.remove('hidden'); }
+}, 3500);
+})();
+</script>
+
+</body>
+</html>
